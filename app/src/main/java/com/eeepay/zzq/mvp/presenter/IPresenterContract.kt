@@ -10,11 +10,19 @@ import rxhttp.wrapper.annotations.NonNull
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
- interface IPresenterContract {
+interface IPresenterContract {
     /**
      * ------注释说明--登录------
      */
     interface ILoginPresenter {
-        fun login(@NonNull owner: LifecycleOwner,@NonNull username: String, @NonNull password: String)
+        fun login(
+            @NonNull owner: LifecycleOwner,
+            @NonNull username: String,
+            @NonNull password: String
+        )
+    }
+    /* ------注释说明---获取到公共数据----- */
+    interface IPubDataPresenter {
+        fun getPubDataInfo(@NonNull owner: LifecycleOwner)
     }
 }

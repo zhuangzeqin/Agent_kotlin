@@ -1,9 +1,13 @@
 package com.eeepay.zzq.agent_kotlin
 
 import com.eeepay.zzq.base.BaseMvpActivity
+import com.eeepay.zzq.bean.PubDataktInfo
 import com.eeepay.zzq.mvp.presenter.base.CreatePresenter
+import com.eeepay.zzq.mvp.presenter.base.PresenterVariable
 import com.eeepay.zzq.mvp.presenter.login.ILoginView
 import com.eeepay.zzq.mvp.presenter.login.LoginPresenter
+import com.eeepay.zzq.mvp.presenter.pubdata.IPublicDataView
+import com.eeepay.zzq.mvp.presenter.pubdata.PubDataPresenter
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
@@ -14,12 +18,17 @@ import kotlinx.android.synthetic.main.activity_login.*
  * 备注:
  */
 
-@CreatePresenter(presenter = [LoginPresenter::class])
-class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView {
+@CreatePresenter(presenter = [LoginPresenter::class, PubDataPresenter::class])
+class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView {
+    @PresenterVariable
+    var mPubDataPresenter: PubDataPresenter? = null
 
     override fun eventOnClick() {
         btn_login.setOnClickListener { view ->
             getPresenter().login(this, "18681490423", "123456")
+        }
+        btn_getPub.setOnClickListener { view ->
+            mPubDataPresenter?.getPubDataInfo(this)
         }
     }
 
@@ -37,7 +46,11 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView {
 
     override fun onLoginSuccess(msg: String) {
         showError(msg)
-        goActivity(this, MainActivity::class.java)
+//        goActivity(this, MainActivity::class.java)
+    }
+
+    override fun showPubDataInfo(pubDataInfo: PubDataktInfo.Data) {
+        showError(pubDataInfo.toString())
     }
 
 }

@@ -16,4 +16,9 @@ interface IModelContract:IBaseContract {
         //登录接口
         fun reqLogin(@NonNull userName: String, @NonNull password: String, @NonNull resultCallBack: IBaseContract.IResultCallBack<T>?)
     }
+
+    //公共数据接口 model 接口
+    interface IPublicDataModel<T> {
+        fun reqPublicData(@NonNull resultCallBack: IBaseContract.IResultCallBack<T>?)
+    }
 }
