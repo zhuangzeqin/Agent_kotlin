@@ -50,24 +50,4 @@ public class ErrorInfo {
         return throwable;
     }
 
-    public boolean show() {
-//        ToastUtils.showShort(TextUtils.isEmpty(errorMsg) ? throwable.getMessage() : errorMsg);
-        return true;
-    }
-
-    /**
-     * @param standbyMsg 备用的提示文案
-     */
-    public boolean show(String standbyMsg) {
-//        ToastUtils.showShort(TextUtils.isEmpty(errorMsg) ? standbyMsg : errorMsg);
-        return true;
-    }
-
-    /**
-     * @param standbyMsg 备用的提示文案
-     */
-    public boolean show(int standbyMsg) {
-//        ToastUtils.showShort(TextUtils.isEmpty(errorMsg) ? MyApplication.getInstance().getString(standbyMsg) : errorMsg);
-        return true;
-    }
 }
