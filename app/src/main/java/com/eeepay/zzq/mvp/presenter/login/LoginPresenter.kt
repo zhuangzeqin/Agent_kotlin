@@ -4,11 +4,12 @@ import androidx.lifecycle.LifecycleOwner
 import com.eeepay.zzq.Api
 import com.eeepay.zzq.bean.LoginktInfo
 import com.eeepay.zzq.mvp.presenter.IPresenterContract.ILoginPresenter
+import com.eeepay.zzq.mvp.presenter.base.BasePresenter
 import com.eeepay.zzq.parse.ErrorInfo
-import com.eeepay.zzq.presenter.base.BasePresenter
 import com.eeepay.zzq.utils.EncRSA
 import com.eeepay.zzq.utils.FastSharedPreferencesTools
 import com.rxjava.rxlife.lifeOnMain
+
 import rxhttp.RxHttp
 
 /**
@@ -24,6 +25,7 @@ class LoginPresenter : BasePresenter<ILoginView>(), ILoginPresenter {
         if (!isAttachView) return
         mView.showLoading()
         val encBase64Pass = EncRSA.EncBase64Pass(password) //RSA 加密密码
+
         /** ------注释说明-参数的封装-------  */
         val mParams: HashMap<String, String> = HashMap(2)
         mParams.put("userName", username)
@@ -32,13 +34,11 @@ class LoginPresenter : BasePresenter<ILoginView>(), ILoginPresenter {
         mParams.put("agentOem", lib_team_id) //代理商oem值 盛代宝为200010
         RxHttp.postJson(Api.API_LOGIN_URL).addAll(mParams)
             .asResultCallBack(LoginktInfo.Data::class.java).lifeOnMain(owner).subscribe(
-                { t -> with(t)
-                {
-                    mView.hideLoading()
-                    mView.onLoginSuccess(toString())
-                    FastSharedPreferencesTools.getInstance().putSerializable("LoginInfo", t)
-                }
-
+                { t -> with(t) {
+                        mView.hideLoading()
+                        mView.onLoginSuccess(this.toString())
+                        FastSharedPreferencesTools.getInstance().putSerializable("LoginInfo", this)
+                    }
                 }, { error ->
                     mView.hideLoading()
                     val errorInfo = ErrorInfo(error)//错误信息

@@ -1,9 +1,7 @@
-package com.eeepay.zzq.presenter.base;
+package com.eeepay.zzq.mvp.presenter.base;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import com.eeepay.zzq.presenter.interfaces.IBaseView;
 
 import java.util.HashMap;
 import java.util.Map;

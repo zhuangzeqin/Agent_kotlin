@@ -1,4 +1,4 @@
-package com.eeepay.zzq.presenter.interfaces;
+package com.eeepay.zzq.mvp.presenter.base.interfaces;
 
 /**
  * 描述：提取显示loading界面和隐藏loading界面的方法，

@@ -15,11 +15,13 @@ import com.eeepay.zzq.utils.Utils
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class APP:Application() {
-   public var context:Context? = null
+class APP : Application() {
+    //lateinit 不能用来修饰基本数据类型，因为基本类型的属性在类加载后的准备阶段都会被初始化为默认值
+    //lateinit不能修饰val变量，只能修饰可变的属性
+    lateinit var context: Context
     override fun onCreate() {
         super.onCreate()
-        context =this
+        context = this
         Utils.init(this)
         FastSharedPreferencesTools.getInstance().init(this)
         RxHttpManager.init()

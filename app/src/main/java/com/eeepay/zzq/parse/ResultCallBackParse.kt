@@ -23,7 +23,7 @@ import java.net.HttpURLConnection
  * 备注:
  */
 @Parser(name = "ResultCallBack", wrappers = [List::class])
-open class ResultCallBackParse<T> : AbstractParser<T> {
+open class ResultCallBackParse<T : Any> : AbstractParser<T> {
     /**
      * 此构造方法适用于任意Class对象，但更多用于带泛型的Class对象，如：List<Student>
      * <p>
@@ -42,9 +42,8 @@ open class ResultCallBackParse<T> : AbstractParser<T> {
      * Java: .asParser(new ResponseParser<>(Student.class))   或者  .asResponse(Student.class)
      * Kotlin: .asParser(ResponseParser(Student::class.java)) 或者  .asResponse(Student::class.java)
      */
-    public constructor(type: Type) : super(type)
+    constructor(type: Type) : super(type)
 
-    @Suppress("UNCHECKED_CAST")
     @Throws(IOException::class)
     override fun onParse(response: Response): T {
         val type: Type = ParameterizedTypeImpl[ResultCallBack::class.java, mType] //获取泛型类型
@@ -74,13 +73,11 @@ open class ResultCallBackParse<T> : AbstractParser<T> {
         * 所以，判断泛型为String类型时，重新赋值，并确保赋值不为null
         */
         //，Kotlin 中的 == 等同于调用 equals() 函数，比较两个对象引用是否相等要用 === 操作符。
-        if (t == null && mType === String::class.java) {
-            t = mesage as T
-        }
+        if (t == null && mType === String::class.java) t = mesage as T
         /* ------注释说明-------- */
         //? 标识当前对象可以为空；
-        //!! 标识当前对象不为空的情况下执行
-        return t!!
+        //!! 标识当前对象不为空的情况下执行 非空断言
+        return checkNotNull(t, { throw ParseException(code.toString(), "暂无法获取数据,请稍后重试！", response);})
     }
 
 }

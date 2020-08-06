@@ -13,10 +13,10 @@ import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.event.AppBus
-import com.eeepay.zzq.presenter.base.BasePresenter
-import com.eeepay.zzq.presenter.base.PresenterDispatch
-import com.eeepay.zzq.presenter.base.PresenterProviders
-import com.eeepay.zzq.presenter.interfaces.IBaseView
+import com.eeepay.zzq.mvp.presenter.base.BasePresenter
+import com.eeepay.zzq.mvp.presenter.base.PresenterDispatch
+import com.eeepay.zzq.mvp.presenter.base.PresenterProviders
+import com.eeepay.zzq.mvp.presenter.base.interfaces.IBaseView
 import com.eeepay.zzq.utils.ActivityStackManager
 import com.eeepay.zzq.utils.ToastUtils
 import com.eeepay.zzq.utils.statusbarstool.StatusBarUtil
@@ -195,10 +195,11 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
             val intent = Intent()
             intent.setClass(context, descClass)
             //表示object不为null的条件下，才会去执行let函数体
-            flags?.let { intent.addFlags(it)}
-            bundle?.let {intent.putExtras(it)}
+            flags?.let { intent.addFlags(it) }
+            bundle?.let { intent.putExtras(it) }
             //API才发现requestCode >= 0才起作用;如果用负值的requestCode和调用startActivity是一样的，所以代码不走startActivityForResult而是startActivity
             (context as Activity).startActivityForResult(intent, requestCode)
+            context.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
         } catch (ex: Exception) {
             ex.printStackTrace()
         }

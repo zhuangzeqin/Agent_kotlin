@@ -1,9 +1,9 @@
 package com.eeepay.zzq.agent_kotlin
 
 import com.eeepay.zzq.base.BaseMvpActivity
+import com.eeepay.zzq.mvp.presenter.base.CreatePresenter
 import com.eeepay.zzq.mvp.presenter.login.ILoginView
 import com.eeepay.zzq.mvp.presenter.login.LoginPresenter
-import com.eeepay.zzq.presenter.base.CreatePresenter
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**

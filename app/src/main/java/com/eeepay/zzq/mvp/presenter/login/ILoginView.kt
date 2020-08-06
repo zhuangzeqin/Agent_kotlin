@@ -1,6 +1,7 @@
 package com.eeepay.zzq.mvp.presenter.login
 
-import com.eeepay.zzq.presenter.interfaces.IBaseView
+import com.eeepay.zzq.mvp.presenter.base.interfaces.IBaseView
+
 
 /**
  * 描述：登录提供的View
@@ -9,6 +10,6 @@ import com.eeepay.zzq.presenter.interfaces.IBaseView
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-interface ILoginView :IBaseView{
+interface ILoginView : IBaseView {
     fun onLoginSuccess(msg:String)//登录成功
 }

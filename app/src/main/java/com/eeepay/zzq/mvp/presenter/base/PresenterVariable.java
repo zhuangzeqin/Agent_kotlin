@@ -1,4 +1,4 @@
-package com.eeepay.zzq.presenter.base;
+package com.eeepay.zzq.mvp.presenter.base;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
