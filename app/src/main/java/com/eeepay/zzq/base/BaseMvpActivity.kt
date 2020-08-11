@@ -116,7 +116,7 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
     }
 
     override fun showError(error: String?) {
-        ToastUtils.showShort(error!!)
+        error?.let { ToastUtils.showShort(it)}
     }
 
     /**

@@ -2,11 +2,8 @@ package com.eeepay.zzq.agent_kotlin
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.eeepay.zzq.Api
 import com.eeepay.zzq.ApiConstant
 import com.eeepay.zzq.bean.LoginktInfo
@@ -15,7 +12,6 @@ import com.eeepay.zzq.parse.ErrorInfo
 import com.eeepay.zzq.utils.EncRSA
 import com.eeepay.zzq.utils.FastSharedPreferencesTools
 import com.rxjava.rxlife.lifeOnMain
-import kotlinx.android.synthetic.main.activity_main.*
 import rxhttp.RxHttp
 import rxhttp.wrapper.annotations.NonNull
 import java.io.ByteArrayOutputStream
@@ -32,20 +28,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn_login.setOnClickListener {
-                loginRequset("18681490423", "123456")
-        }
-        btn_get.setOnClickListener(View.OnClickListener {
+//        btn_login.setOnClickListener {
+//                loginRequset("18681490423", "123456")
+//        }
+//        btn_get.setOnClickListener(View.OnClickListener {
+//
+//            getCode(getUUID()!!)
+//        })
+//        btn_post.setOnClickListener(View.OnClickListener {
 //            val id = it.id
-//            val serializableValue = FastSharedPreferencesTools.getInstance().getSerializable("LoginInfo", null)
-//            val loginInfo:LoginInfo.DataBean = serializableValue as LoginInfo.DataBean
-//            Toast.makeText(this, loginInfo.agentName, Toast.LENGTH_LONG).show()
-            getCode(getUUID()!!)
-        })
-        btn_post.setOnClickListener(View.OnClickListener {
-            val id = it.id
-            getPostRequest()
-        })
+//            getPostRequest()
+//        })
     }
 
     /**
@@ -67,12 +60,12 @@ class MainActivity : AppCompatActivity() {
         RxHttp.postJson(Api.API_LOGIN_URL).addAll(mParams)
             .asResultCallBack(LoginktInfo.Data::class.java).lifeOnMain(this).subscribe(
                 { t ->
-                    tv_hello.text = t.agentName
+//                    tv_hello.text = t.agentName
                     FastSharedPreferencesTools.getInstance().putSerializable("LoginInfo", t)
                 }, { error ->
                     val errorInfo = ErrorInfo(error)//错误信息
-                    tv_hello.text = "${errorInfo.errorCode}:${errorInfo.errorMsg}"
-                    Toast.makeText(this, tv_hello.text, Toast.LENGTH_LONG).show()
+//                    tv_hello.text = "${errorInfo.errorCode}:${errorInfo.errorMsg}"
+//                    Toast.makeText(this, tv_hello.text, Toast.LENGTH_LONG).show()
                 }
             )
     }
@@ -86,13 +79,13 @@ class MainActivity : AppCompatActivity() {
                 val body = result.body
                 val byteStream = body!!.byteStream()
                 val readStream = readStream(byteStream)
-                Glide.with(this).asGif().load(readStream)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .into(iv_code)
+//                Glide.with(this).asGif().load(readStream)
+//                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+//                    .into(iv_code)
             }, { error ->
                 val errorInfo = ErrorInfo(error)//错误信息
-                tv_hello.text = "${errorInfo.errorCode}:${errorInfo.errorMsg}"
-                Toast.makeText(this, tv_hello.text, Toast.LENGTH_LONG).show()
+//                tv_hello.text = "${errorInfo.errorCode}:${errorInfo.errorMsg}"
+//                Toast.makeText(this, tv_hello.text, Toast.LENGTH_LONG).show()
             })
     }
 
@@ -109,8 +102,8 @@ class MainActivity : AppCompatActivity() {
             },
             { error ->
                 val errorInfo = ErrorInfo(error)//错误信息
-                tv_hello.text = "${errorInfo.errorCode}:${errorInfo.errorMsg}"
-                Toast.makeText(this, tv_hello.text, Toast.LENGTH_LONG).show()
+//                tv_hello.text = "${errorInfo.errorCode}:${errorInfo.errorMsg}"
+//                Toast.makeText(this, tv_hello.text, Toast.LENGTH_LONG).show()
             }
 
         )
