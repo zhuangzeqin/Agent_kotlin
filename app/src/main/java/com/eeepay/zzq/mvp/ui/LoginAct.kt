@@ -1,5 +1,6 @@
-package com.eeepay.zzq.agent_kotlin
+package com.eeepay.zzq.mvp.ui
 
+import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
 import com.eeepay.zzq.bean.PubDataktInfo
 import com.eeepay.zzq.mvp.presenter.base.CreatePresenter
@@ -46,7 +47,7 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView 
 
     override fun onLoginSuccess(msg: String) {
         showError(msg)
-//        goActivity(this, MainActivity::class.java)
+        goActivity(this, RxMainAct::class.java)
     }
 
     override fun showPubDataInfo(pubDataInfo: PubDataktInfo.Data) {

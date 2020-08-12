@@ -32,7 +32,7 @@ import rxhttp.wrapper.annotations.NonNull
  */
 abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
     protected val mTag = BaseMvpFragment::class.java.simpleName//tag 标签
-    protected lateinit var mRootView: View//根目录
+    protected  var mRootView: View? = null//根目录
     protected lateinit var mContext: Context//上下文对象
     protected var mBundle:Bundle? = null//bundle 对象
     protected lateinit var mActivity:Activity//Activity
@@ -80,15 +80,10 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
         @Nullable container: ViewGroup?,
         @Nullable savedInstanceState: Bundle?
     ): View? {
-        if (mRootView != null) {
-            val parent = mRootView.parent as ViewGroup
-            parent?.removeView(mRootView)
-        } else {
-            mRootView = inflater.inflate(getLayoutId(), container, false)
-            mActivity = activity!!
-            mContext = mActivity
-            this.inflater = inflater
-        }
+        mRootView = inflater.inflate(getLayoutId(), container, false)
+        mActivity = activity!!
+        mContext = mActivity
+        this.inflater = inflater
         return mRootView
     }
 

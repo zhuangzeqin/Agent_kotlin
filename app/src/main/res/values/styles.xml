@@ -11,4 +11,9 @@
         <item name="android:textColorPrimary">@color/progress_color</item>
         <item name="android:background">@color/progress_color</item>
     </style>
+    <!--沉浸式状态栏-->
+    <style name="AppTheme.TranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
 </resources>

@@ -2,7 +2,7 @@ package com.eeepay.zzq.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 
 
@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class MainAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm),
+class MainAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm),
     ViewPager.OnPageChangeListener {
     lateinit var mFragments: List<Fragment>//Fragment 实例
     lateinit var mTitle: List<String>//标题
@@ -50,7 +50,7 @@ class MainAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm),
      * @see ViewPager.SCROLL_STATE_SETTLING
      */
     override fun onPageScrollStateChanged(state: Int) {
-        TODO("Not yet implemented")
+
     }
 
     /**
@@ -63,7 +63,7 @@ class MainAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm),
      * @param positionOffsetPixels Value in pixels indicating the offset from position.
      */
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        TODO("Not yet implemented")
+
     }
 
     /**

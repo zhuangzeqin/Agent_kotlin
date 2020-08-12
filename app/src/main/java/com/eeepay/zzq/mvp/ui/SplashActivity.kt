@@ -1,7 +1,6 @@
 package com.eeepay.zzq.mvp.ui
 
 import androidx.lifecycle.rxLifeScope
-import com.eeepay.zzq.agent_kotlin.LoginAct
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
 import com.eeepay.zzq.mvp.presenter.base.BasePresenter
@@ -37,7 +36,7 @@ class SplashActivity:BaseMvpActivity<BasePresenter<IBaseView>>() {
 
     private fun goToSplash() {
         splash_iv.postDelayed( {
-            goActivity(this,LoginAct::class.java)
+            goActivity(this, LoginAct::class.java)
         },2000)
     }
 

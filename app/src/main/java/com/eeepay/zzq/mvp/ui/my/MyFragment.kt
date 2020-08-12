@@ -1,4 +1,4 @@
-package com.eeepay.zzq.mvp.ui.home
+package com.eeepay.zzq.mvp.ui.my
 
 import android.os.Bundle
 import com.eeepay.zzq.UrlConfitkt
@@ -9,20 +9,20 @@ import com.eeepay.zzq.mvp.presenter.base.interfaces.IBaseView
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
- * 描述：首页
+ * 描述：我的
  * 作者：zhuangzeqin
  * 时间: 2020/8/11-16:34
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class HomeFragment : BaseMvpFragment<BasePresenter<IBaseView>>() {
+class MyFragment : BaseMvpFragment<BasePresenter<IBaseView>>() {
     /**
      * 创建实例
      */
-    fun newInstance(title: String?): HomeFragment {
-        val bundle = Bundle()
+    fun newInstance(title: String?): MyFragment {
+        val bundle = Bundle();
         bundle.putString(UrlConfitkt.BUNDLE_TITLE, title)
-        val fragment: HomeFragment = HomeFragment()
+        val fragment: MyFragment = MyFragment();
         fragment.arguments = bundle
         return fragment
     }

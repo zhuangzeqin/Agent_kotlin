@@ -222,9 +222,10 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //白色状态栏
             if (colorId == 0) {
-                StatusBarUtil.setStatusBarColor(this, android.R.color.white)
+//                StatusBarUtil.setStatusBarColor(this, android.R.color.white)
+                StatusBarUtil.setStatusBarColor(this, R.color.unify_bg)
                 //true 字体颜色为黑色，false为白色
-                StatusBarUtil.setLightStatusBar(this, true, true)
+                StatusBarUtil.setLightStatusBar(this, false, true)
             } else {
                 StatusBarUtil.setStatusBarColor(this, colorId)
                 //true 字体颜色为黑色，false为白色

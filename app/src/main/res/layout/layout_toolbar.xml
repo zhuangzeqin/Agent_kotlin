@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/unify_bg"
+    app:contentInsetStart="0dp"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/text_size_10"
+        android:paddingRight="@dimen/text_size_10">
+
+        <TextView
+            android:id="@+id/iv_back"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@mipmap/back"
+            android:ellipsize="end"
+            android:padding="@dimen/text_size_15"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tv_rightCenterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="60dp"
+            android:ellipsize="end"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/unify_title_bg"
+            android:visibility="gone"
+            tools:text="标题2" />
+
+        <TextView
+            android:id="@+id/tv_rightTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="14dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            tools:text="确定" />
+    </FrameLayout>
+</androidx.appcompat.widget.Toolbar>

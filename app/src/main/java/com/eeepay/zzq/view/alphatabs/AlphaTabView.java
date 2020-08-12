@@ -18,6 +18,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.eeepay.zzq.agent_kotlin.R;
+
 /**
  * ================================================
  * 作    者：jeasonlzy & sufly0001@gmail.com
@@ -67,12 +69,12 @@ public class AlphaTabView extends View {
         mTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, mTextSize, getResources().getDisplayMetrics());
         mPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, mPadding, getResources().getDisplayMetrics());
         //获取所有的自定义属性
-        TypedArray a = context.obtainStyledAttributes(attrs, com.yinglan.alphatabs.R.styleable.AlphaTabView);
-        BitmapDrawable iconNormal = (BitmapDrawable) a.getDrawable(com.yinglan.alphatabs.R.styleable.AlphaTabView_tabIconNormal);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AlphaTabView);
+        BitmapDrawable iconNormal = (BitmapDrawable) a.getDrawable(R.styleable.AlphaTabView_tabIconNormal);
         if (iconNormal != null) {
             mIconNormal = iconNormal.getBitmap();
         }
-        BitmapDrawable iconSelected = (BitmapDrawable) a.getDrawable(com.yinglan.alphatabs.R.styleable.AlphaTabView_tabIconSelected);
+        BitmapDrawable iconSelected = (BitmapDrawable) a.getDrawable(R.styleable.AlphaTabView_tabIconSelected);
         if (iconSelected != null) {
             mIconSelected = iconSelected.getBitmap();
         }
@@ -83,12 +85,12 @@ public class AlphaTabView extends View {
             mIconNormal = null == mIconSelected ? mIconNormal : mIconSelected;
         }
 
-        mText = a.getString(com.yinglan.alphatabs.R.styleable.AlphaTabView_tabText);
-        mTextSize = a.getDimensionPixelSize(com.yinglan.alphatabs.R.styleable.AlphaTabView_tabTextSize, mTextSize);
-        mTextColorNormal = a.getColor(com.yinglan.alphatabs.R.styleable.AlphaTabView_textColorNormal, mTextColorNormal);
-        mTextColorSelected = a.getColor(com.yinglan.alphatabs.R.styleable.AlphaTabView_textColorSelected, mTextColorSelected);
-        mBadgeBackgroundColor = a.getColor(com.yinglan.alphatabs.R.styleable.AlphaTabView_badgeBackgroundColor, mBadgeBackgroundColor);
-        mPadding = (int) a.getDimension(com.yinglan.alphatabs.R.styleable.AlphaTabView_paddingTexwithIcon, mPadding);
+        mText = a.getString(R.styleable.AlphaTabView_tabText);
+        mTextSize = a.getDimensionPixelSize(R.styleable.AlphaTabView_tabTextSize, mTextSize);
+        mTextColorNormal = a.getColor(R.styleable.AlphaTabView_textColorNormal, mTextColorNormal);
+        mTextColorSelected = a.getColor(R.styleable.AlphaTabView_textColorSelected, mTextColorSelected);
+        mBadgeBackgroundColor = a.getColor(R.styleable.AlphaTabView_badgeBackgroundColor, mBadgeBackgroundColor);
+        mPadding = (int) a.getDimension(R.styleable.AlphaTabView_paddingTexwithIcon, mPadding);
         a.recycle();
         initText();
     }

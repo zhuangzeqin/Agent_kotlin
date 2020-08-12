@@ -9,8 +9,6 @@ import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.ViewPager;
 
-import com.yinglan.alphatabs.AlphaTabView;
-import com.yinglan.alphatabs.OnTabChangedListner;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,4 +12,5 @@ import rxhttp.wrapper.annotation.DefaultDomain
 object UrlConfitkt {
     @DefaultDomain
     const val BASEDEFAULTURL = "http://cs-kq-agentapi2.51ydmw.com/kqAgentApi2/"//默认地址
+    const val BUNDLE_TITLE = "title"
 }
