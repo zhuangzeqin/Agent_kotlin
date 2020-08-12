@@ -24,7 +24,7 @@ import com.eeepay.zzq.view.DialogHelper
 import rxhttp.wrapper.annotations.NonNull
 
 /**
- * 描述：class describe
+ * 描述：mvp 抽象Fragment类基类
  * 作者：zhuangzeqin
  * 时间: 2020/8/7-10:07
  * 邮箱：zzq@eeepay.cn

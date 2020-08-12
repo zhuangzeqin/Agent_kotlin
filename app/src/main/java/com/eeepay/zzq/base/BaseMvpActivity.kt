@@ -8,11 +8,18 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.text.TextUtils
+import android.util.Log
+import android.view.View
 import android.view.Window
+import android.widget.TextView
 import androidx.annotation.UiThread
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.event.AppBus
+import com.eeepay.zzq.listener.NoRepeatClickListener
 import com.eeepay.zzq.mvp.presenter.base.BasePresenter
 import com.eeepay.zzq.mvp.presenter.base.PresenterDispatch
 import com.eeepay.zzq.mvp.presenter.base.PresenterProviders
@@ -53,6 +60,21 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
     /* ------注释说明----Bundle---- */
     protected var mBundle: Bundle? = null
 
+    /***获取Toolbar */
+    protected var mToolbar: Toolbar? = null
+
+    /***获取title */
+    protected var mTitle: TextView? = null
+
+    /***获取右边的标题 */
+    protected var mRightTitle: TextView? = null
+
+    /***获取右边中间标题 */
+    protected var mRightCenterTitle: TextView? = null
+
+    /***获取返回的图标 */
+    protected var mBack: TextView? = null
+
     /**
      * 初始化
      */
@@ -76,6 +98,10 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
         mPresenterDispatch!!.onCreatePresenter<P>(savedInstanceState)
         /** 设置状态栏问题颜色（黑/白）  */
         setStatusBar(0)
+        /** 设置初始化 ToolBar **/
+        if (!TextUtils.isEmpty(setTitle())) {
+            initToolBar(setTitle())
+        }
         /** 设置初始化 View **/
         initView()
         /** 设置点击事件操作**/
@@ -235,6 +261,195 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
     }
 
     /**
+     * 设置标题
+     *
+     * @param title
+     */
+    open fun setTitle(title: String) {
+        var title = title
+        if (!TextUtils.isEmpty(title)) {
+            if (title.length >= 15) {
+                title = title.substring(0, 15) + "..."
+            }
+            mTitle!!.text = title
+        }
+    }
+
+    /**
+     * 设置标题右边图标和点击事件
+     *
+     * @param resid
+     * @param onClickListener
+     */
+    open fun setTitleRightIcon(
+        resid: Int,
+        onClickListener: View.OnClickListener
+    ) {
+        val drawable = mContext!!.resources.getDrawable(resid)
+        drawable.setBounds(
+            0,
+            0,
+            drawable.minimumWidth,
+            drawable.minimumHeight
+        ) //必须设置图片大小，否则不显示
+        mTitle!!.setCompoundDrawables(null, null, drawable, null)
+        mTitle!!.compoundDrawablePadding = 10 //设置图片和text之间的间距
+        mTitle!!.setOnClickListener(object : NoRepeatClickListener() {
+            override fun onSingleClick(view: View?) {
+                onClickListener.onClick(view)
+            }
+        })
+    }
+
+    /**
+     * 初始化 ToolBar
+     *
+     * @param title
+     */
+    protected open fun initToolBar(title: String?) {
+        mToolbar = findViewById<Toolbar>(R.id.toolbar)
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar)
+            val actionBar: ActionBar? = supportActionBar
+            actionBar!!.setTitle("")
+            mTitle = findViewById(R.id.tv_title)
+            if (!TextUtils.isEmpty(title) && mTitle != null) {
+                mTitle!!.text = title
+            } else {
+                /** ------当没有标题的时候； 隐藏掉toolbar--------  */
+                mToolbar!!.visibility = View.GONE
+            }
+            mBack = findViewById(R.id.iv_back)
+            mRightTitle = findViewById(R.id.tv_rightTitle)
+            if (mBack != null) {
+                mBack!!.setOnClickListener { finish() }
+            }
+            mRightCenterTitle = findViewById(R.id.tv_rightCenterTitle)
+        } else {
+            Log.d(TAG, "mToolbar 控件为空")
+        }
+    }
+    /**
+     * 设置右边中间标
+     *
+     * @param resid
+     */
+    open fun setRightCenterResource(
+        resid: Int,
+        onClickListener: View.OnClickListener
+    ) {
+        mRightCenterTitle!!.visibility = View.VISIBLE
+        val drawable = mContext!!.resources.getDrawable(resid)
+        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+        mRightCenterTitle!!.setCompoundDrawables(null, null, drawable, null)
+        mRightCenterTitle!!.setOnClickListener(object : NoRepeatClickListener() {
+            override fun onSingleClick(view: View?) {
+                onClickListener.onClick(view)
+            }
+        })
+    }
+    /**
+     * 设置标题右边图标和点击事件
+     *
+     * @param resid
+     */
+    open fun setTitleRightIcon(resid: Int) {
+        val drawable = mContext!!.resources.getDrawable(resid)
+        drawable.setBounds(
+            0,
+            0,
+            drawable.minimumWidth,
+            drawable.minimumHeight
+        ) //必须设置图片大小，否则不显示
+        mTitle!!.setCompoundDrawables(null, null, drawable, null)
+        mTitle!!.compoundDrawablePadding = 10 //设置图片和text之间的间距
+    }
+    /**
+     * 是否显示返回图标
+     *
+     * @param isVisible
+     */
+    open fun isShowBack(isVisible: Boolean) {
+        if (isVisible) {
+            mBack!!.visibility = View.VISIBLE
+        } else {
+            mBack!!.visibility = View.GONE
+        }
+    }
+    /**
+     * 是否显示Toolbar
+     *
+     * @param isVisible
+     */
+    open fun isShowToolbar(isVisible: Boolean) {
+        if (isVisible) {
+            mToolbar!!.visibility = View.VISIBLE
+        } else {
+            mToolbar!!.visibility = View.GONE
+        }
+    }
+    /**
+     * 设置左边图标
+     *
+     * @param resid
+     */
+    open fun setBackResource(resid: Int) {
+        mBack!!.visibility = View.VISIBLE
+        val drawable = mContext!!.resources.getDrawable(resid)
+        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+        mBack!!.setCompoundDrawables(null, null, drawable, null)
+    }
+    /**
+     * 设置右边图标
+     *
+     * @param resid
+     */
+    open fun setRightResource(resid: Int) {
+        mRightTitle!!.visibility = View.VISIBLE
+        val drawable = mContext!!.resources.getDrawable(resid)
+        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+        mRightTitle!!.setCompoundDrawables(null, null, drawable, null)
+    }
+    /**
+     * 设置右边图标
+     *
+     * @param resid
+     */
+    open fun setRightResource(
+        resid: Int,
+        onClickListener: View.OnClickListener
+    ) {
+        mRightTitle!!.visibility = View.VISIBLE
+        val drawable = mContext!!.resources.getDrawable(resid)
+        drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+        mRightTitle!!.setCompoundDrawables(null, null, drawable, null)
+        mRightTitle!!.setOnClickListener(object : NoRepeatClickListener() {
+            override fun onSingleClick(view: View?) {
+                onClickListener.onClick(view)
+            }
+        })
+    }
+    /**
+     * 设置右边图标
+     *
+     * @param txt
+     */
+    open fun setRightTitle(
+        txt: String?,
+        onClickListener: View.OnClickListener
+    ) {
+        if (!TextUtils.isEmpty(txt)) {
+            mRightTitle!!.visibility = View.VISIBLE
+            mRightTitle!!.text = txt
+            mRightTitle!!.setOnClickListener(object : NoRepeatClickListener() {
+                protected override fun onSingleClick(view: View?) {
+                    onClickListener.onClick(view)
+                }
+            })
+        }
+    }
+
+    /**
      * 布局id
      */
     protected abstract fun getContentView(): Int
@@ -253,6 +468,11 @@ abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBas
      * 初始化数据
      */
     protected abstract fun initData()
+
+    /**
+     * 抽象的设置的标题的方法 子类实现
+     */
+    protected abstract fun setTitle(): String?
 
 
 }

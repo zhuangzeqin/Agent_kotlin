@@ -1,6 +1,5 @@
 package com.eeepay.zzq.mvp.ui
 
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.eeepay.zzq.adapter.MainAdapter
 import com.eeepay.zzq.agent_kotlin.R
@@ -32,6 +31,7 @@ class RxMainAct : BaseMvpActivity<BasePresenter<IBaseView>>() {
      * 初始化操作
      */
     override fun initView() {
+        isShowBack(false)
     }
 
     /**
@@ -53,9 +53,15 @@ class RxMainAct : BaseMvpActivity<BasePresenter<IBaseView>>() {
         mutableListOf.add(MyFragment().newInstance(title[3]))
         val mainAdapter = MainAdapter(mutableListOf, title, supportFragmentManager)
         //设置接口
-        mainAdapter.mPageSelectClickEvent = object : MainAdapter.OnPageSelectClickEvent{
+        mainAdapter.mPageSelectClickEvent = object : MainAdapter.OnPageSelectClickEvent {
             override fun getCurrentTab(index: Int) {
-                Toast.makeText(this@RxMainAct, "index:"+index, Toast.LENGTH_SHORT).show()
+                when (index) {
+                    0 -> setTitle("首页")
+                    1 -> setTitle("数据")
+                    2 -> setTitle("应用")
+                    3 -> setTitle("我的")
+                    else -> setTitle("")
+                }
             }
         }
         mViewPager.adapter = mainAdapter
@@ -65,5 +71,12 @@ class RxMainAct : BaseMvpActivity<BasePresenter<IBaseView>>() {
         alphaIndicator.getTabView(1).showNumber(10089)
         alphaIndicator.getTabView(2).showNumber(88)
         alphaIndicator.getTabView(3).showPoint()
+    }
+
+    /**
+     * 抽象的设置的标题的方法 子类实现
+     */
+    override fun setTitle(): String? {
+        return "首页"
     }
 }

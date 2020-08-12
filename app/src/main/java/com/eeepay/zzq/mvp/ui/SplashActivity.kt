@@ -52,5 +52,12 @@ class SplashActivity:BaseMvpActivity<BasePresenter<IBaseView>>() {
     override fun initData() {
     }
 
+    /**
+     * 抽象的设置的标题的方法 子类实现
+     */
+    override fun setTitle(): String? {
+        return null
+    }
+
 
 }
