@@ -24,4 +24,16 @@ copy()方法
  */
 data class AppEventData(var index: Int, var mesage: String) : Serializable {
     var marks: String? = null
+
+    //out T 等价于 ? extends T，in T 等价于 ? super T，此外还有 * 等价于 ?
+    /**
+     * inner标记一个类是内部类
+     * 可以引用外部类的成员
+     * 采用this@类名方式，获取到外部类的this对象
+     */
+//    inner class inner{
+//        fun foo(){
+//            val innerA = this@AppEventData.marks
+//        }
+//    }
 }

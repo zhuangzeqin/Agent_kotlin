@@ -45,7 +45,7 @@ import rxhttp.wrapper.utils.GsonUtil;
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-public class RxHttpManager {
+public final class RxHttpManager {
     //再拼接的字符串后加上key=46940880d9fGklaq23lask;ldasdo;3asebfdylkj@@KqAgentapi2#$$^&pretty
     private static final String KEY_VALUE = "key=46940880d9fGklaq23lask;ldasdo;3asebfdylkj@@KqAgentapi2#$$^&pretty";
     //Gson 处理Null 值的问题

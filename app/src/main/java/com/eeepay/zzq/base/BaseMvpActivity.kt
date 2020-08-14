@@ -37,8 +37,10 @@ import rxhttp.wrapper.annotations.NonNull
  * 时间: 2020/8/4-15:27
  * 邮箱：zzq@eeepay.cn
  * 备注:
+ * //out即java中的<? extends T> 意为仅可作为返回值，返回值类型是T或T的子类
+  //in即java中的<? super T> 意为仅可作为参数传入，传入的参数类型是T或T的子类
  */
-abstract class BaseMvpActivity<P : BasePresenter<*>> : AppCompatActivity(), IBaseView {
+abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompatActivity(), IBaseView {
     protected val TAG = BaseMvpActivity::class.java.simpleName//TAG 标签贴
 
     /**
