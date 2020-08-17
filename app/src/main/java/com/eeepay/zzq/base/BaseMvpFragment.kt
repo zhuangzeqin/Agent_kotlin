@@ -30,12 +30,12 @@ import rxhttp.wrapper.annotations.NonNull
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
+abstract class BaseMvpFragment<out P : BasePresenter<out IBaseView>> : Fragment(), IBaseView {
     protected val mTag = BaseMvpFragment::class.java.simpleName//tag 标签
     protected  var mRootView: View? = null//根目录
-    protected lateinit var mContext: Context//上下文对象
+    protected var mContext: Context? = null//上下文对象
     protected var mBundle:Bundle? = null//bundle 对象
-    protected lateinit var mActivity:Activity//Activity
+    protected var mActivity:Activity? = null//Activity
     protected var inflater: LayoutInflater? = null
     // 标志位 标志已经初始化完成。
     protected var isPrepared = false
@@ -82,7 +82,7 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
     ): View? {
         mRootView = inflater.inflate(getLayoutId(), container, false)
         mActivity = activity!!
-        mContext = mActivity
+        mContext = mActivity!!
         this.inflater = inflater
         return mRootView
     }
@@ -107,6 +107,7 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
         //解绑View的操作
         mPresenterDispatch!!.detachView<P>()
         AppBus.getInstance().unregister(this) //订阅事件
+        mActivity = null
         super.onDetach()
     }
 
@@ -164,6 +165,10 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
             onInvisible()
         }
     }
+
+    /**
+     * 显示loading
+     */
     override fun showLoading() {
         showWaitDialog(getString(R.string.loading))
     }
@@ -172,8 +177,11 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
         TODO("Not yet implemented")
     }
 
+    /**
+     * 隐藏loading
+     */
     override fun hideLoading() {
-        if (mActivity != null && !mActivity.isFinishing && mProgressDialog != null && isVisible && mProgressDialog!!.isShowing()) {
+        if (mActivity != null && !mActivity!!.isFinishing && mProgressDialog != null && isVisible && mProgressDialog!!.isShowing()) {
             try {
                 mProgressDialog!!.dismiss()
                 mProgressDialog = null
@@ -183,6 +191,9 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
         }
     }
 
+    /**
+     * 显示提示语包括错误的提示语
+     */
     override fun showError(error: String?) {
         if (isVisible)
         error?.let { ToastUtils.showShort(it)}
@@ -193,7 +204,7 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
      */
     @UiThread
     open fun showWaitDialog(message: String?): ProgressDialog? {
-        if (mActivity != null && !mActivity.isFinishing && isVisible)
+        if (mActivity != null && !mActivity!!.isFinishing && isVisible)
         {
             if (mProgressDialog == null) {
                 mProgressDialog = DialogHelper.getProgressDialog(mActivity, message)
@@ -210,7 +221,7 @@ abstract class BaseMvpFragment<P : BasePresenter<*>> : Fragment(), IBaseView {
 
     override fun onPause() {
         super.onPause()
-        if (mProgressDialog != null && !mActivity.isFinishing) {
+        if (mProgressDialog != null && !mActivity!!.isFinishing) {
             mProgressDialog!!.dismiss()
         }
     }

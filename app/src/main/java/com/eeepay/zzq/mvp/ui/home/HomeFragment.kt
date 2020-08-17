@@ -41,10 +41,10 @@ class HomeFragment : BaseMvpFragment<BasePresenter<IBaseView>>() {
         home_txt_msg.text = title
 
         home_btn_data1.setOnClickListener { view ->
-
+            showError("abc")
         }
         home_btn_data2.setOnClickListener { view ->
-
+            showError("123")
         }
     }
 }
