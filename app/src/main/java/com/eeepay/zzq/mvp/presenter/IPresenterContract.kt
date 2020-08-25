@@ -21,8 +21,17 @@ interface IPresenterContract {
             @NonNull password: String
         )
     }
+
     /* ------注释说明---获取到公共数据----- */
     interface IPubDataPresenter {
         fun getPubDataInfo(@NonNull owner: LifecycleOwner)
+    }
+    /* ------注释说明---获取到首页数据----- */
+    interface ILoadCurrDayDataPresenter {
+        fun getLoadCurrDayData(@NonNull owner: LifecycleOwner)
+    }
+    /* ------注释说明---获取商户需要的参数----- */
+    interface IQueryMerchantParamsPresenter {
+        fun getQueryMerchantParams(@NonNull owner: LifecycleOwner)
     }
 }

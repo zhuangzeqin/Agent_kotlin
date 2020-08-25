@@ -10,15 +10,29 @@ import rxhttp.wrapper.annotations.NonNull
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-interface IModelContract:IBaseContract {
+interface IModelContract : IBaseContract {
     //登录model 接口
     interface ILoginModel<T> {
         //登录接口
-        fun reqLogin(@NonNull userName: String, @NonNull password: String, @NonNull resultCallBack: IBaseContract.IResultCallBack<T>?)
+        fun reqLogin(
+            @NonNull userName: String,
+            @NonNull password: String,
+            @NonNull resultCallBack: IBaseContract.IResultCallBack<T>?
+        )
     }
 
     //公共数据接口 model 接口
     interface IPublicDataModel<T> {
         fun reqPublicData(@NonNull resultCallBack: IBaseContract.IResultCallBack<T>?)
+    }
+
+    //首页 ->今日业绩model 接口
+    interface ILoadCurrDayDataModel<T> {
+        //首页->今日业绩
+        fun loadCurrDayData(@NonNull resultCallBack: IBaseContract.IResultCallBack<T>?)
+    }
+    //获取商户需要的参数接口
+    interface IQueryMerchantParamsModel<T> {
+        fun reqQueryMerchantParams(@NonNull resultCallBack: IBaseContract.IResultCallBack<T>?)
     }
 }

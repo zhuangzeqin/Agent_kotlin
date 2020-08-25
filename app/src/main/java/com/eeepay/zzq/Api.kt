@@ -11,5 +11,7 @@ class Api {
     companion object{
         const val API_LOGIN_URL = "login"//登录
         const val API_GETPUBLICDATA_URL = "publicData/getPublicData"//公共数据接口
+        const val API_LOADCURRDAYDATA_URL = "index/loadCurrDayData"//首页->今日业绩接口
+        const val API_QUERYMERCHANTPARAMS_URL = "merchant/queryMerchantParams"//首页->查询商户需要的信息接口
     }
 }

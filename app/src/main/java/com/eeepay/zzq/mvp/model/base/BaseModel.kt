@@ -5,7 +5,7 @@ import com.rxjava.rxlife.BaseScope
 import rxhttp.wrapper.annotations.NonNull
 
 /**
- * 描述：class describe
+ * 描述：抽象的BaseModel类
  * 作者：zhuangzeqin
  * 时间: 2020/8/6-10:24
  * 邮箱：zzq@eeepay.cn
