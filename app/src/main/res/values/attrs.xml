@@ -11,4 +11,9 @@
         <attr name="badgeBackgroundColor" format="color" />
         <attr name="paddingTexwithIcon" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="SignatureView">
+        <attr format="color" name="penColor"/>
+        <attr format="color" name="backColor"/>
+        <attr format="integer" name="penWidth"/>
+    </declare-styleable>
 </resources>

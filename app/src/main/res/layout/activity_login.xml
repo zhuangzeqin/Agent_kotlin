@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context="com.eeepay.zzq.mvp.ui.LoginAct">
     <LinearLayout
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,6 +26,31 @@
             android:id="@+id/btn_getPub"
             android:gravity="center"
             android:text="获取公共数据"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_download"
+            android:gravity="center"
+            android:text="升级断点下载"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_h"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:max="100"
+            android:progress="0"
+            />
+        <TextView
+            android:id="@+id/progress_msg"
+            android:text="0%"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/unify_bg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

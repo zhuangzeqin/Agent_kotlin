@@ -7,6 +7,8 @@ import com.eeepay.zzq.mvp.presenter.base.CreatePresenter
 import com.eeepay.zzq.mvp.presenter.base.PresenterVariable
 import com.eeepay.zzq.mvp.presenter.login.ILoginView
 import com.eeepay.zzq.mvp.presenter.login.LoginPresenter
+import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionPresenter
+import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionView
 import com.eeepay.zzq.mvp.presenter.pubdata.IPublicDataView
 import com.eeepay.zzq.mvp.presenter.pubdata.PubDataPresenter
 import kotlinx.android.synthetic.main.activity_login.*
@@ -19,10 +21,13 @@ import kotlinx.android.synthetic.main.activity_login.*
  * 备注:
  */
 
-@CreatePresenter(presenter = [LoginPresenter::class, PubDataPresenter::class])
-class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView {
+@CreatePresenter(presenter = [LoginPresenter::class, PubDataPresenter::class, CheckVersionPresenter::class])
+class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView, CheckVersionView {
     @PresenterVariable
     var mPubDataPresenter: PubDataPresenter? = null
+
+    @PresenterVariable
+    var mCheckVersionPresenter: CheckVersionPresenter? = null
 
     override fun eventOnClick() {
         btn_login.setOnClickListener { view ->
@@ -30,6 +35,12 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView 
         }
         btn_getPub.setOnClickListener { view ->
             mPubDataPresenter?.getPubDataInfo(this)
+        }
+        //升级断点下载测试demo
+        btn_download.setOnClickListener { view ->
+            val downloadUrl: String =
+                "http://app-client.oss-cn-hangzhou.aliyuncs.com/oem/android/zdb_v1.0.3_20180125_2243.apk"
+            mCheckVersionPresenter!!.reqCheckVersion(this, downloadUrl)
         }
     }
 
@@ -59,6 +70,24 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView 
      */
     override fun setTitle(): String? {
         return null
+    }
+
+    /**
+     * progress 下载进度回调,0-100，仅在进度有更新时才会回调
+     * currentSize 当前已下载的字节大小
+     * totalSize 要下载的总字节大
+     */
+    override fun onCheckVersionProgress(progress: Int, currentSize: Long, totalSize: Long) {
+        progress_bar_h.setProgress(progress)
+        progress_msg.setText("$progress%")
+    }
+
+    /**
+     * 完成
+     */
+    override fun onCompleteProgress(msg: String) {
+        showError(msg)
+        progress_msg.setText("$msg 下载完成")
     }
 
 }

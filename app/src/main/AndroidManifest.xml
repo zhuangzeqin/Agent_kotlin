@@ -23,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.eeepay.zzq.mvp.ui.LoginAct"/>
-        <activity android:name=".MainActivity"/>
         <activity android:name="com.eeepay.zzq.mvp.ui.RxMainAct"/>
     </application>
 

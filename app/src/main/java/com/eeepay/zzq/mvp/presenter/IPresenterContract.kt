@@ -34,4 +34,11 @@ interface IPresenterContract {
     interface IQueryMerchantParamsPresenter {
         fun getQueryMerchantParams(@NonNull owner: LifecycleOwner)
     }
+
+    /**
+     * 检查版本升级
+     */
+    interface ICheckVersionPresenter {
+        fun reqCheckVersion(@NonNull owner: LifecycleOwner,@NonNull downloadUrl:String)
+    }
 }
