@@ -16,6 +16,8 @@ import com.eeepay.zzq.mvp.presenter.base.BasePresenter
  */
 class LoadCurrDayDataPresenter:BasePresenter<LoadCurrDayDataView>(),IPresenterContract.ILoadCurrDayDataPresenter {
     private lateinit var mode: LoadCurrDayDataModel//model
+//    private var mNumber: Int by Delegates.notNull<Int>()
+//    private var number :String by Delegates.notNull<String>()
     override fun getLoadCurrDayData(owner: LifecycleOwner) {
         if(!isAttachView) return
         mView.showLoading()

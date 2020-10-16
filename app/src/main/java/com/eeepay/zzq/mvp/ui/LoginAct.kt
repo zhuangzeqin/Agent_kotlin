@@ -39,7 +39,9 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
         //升级断点下载测试demo
         btn_download.setOnClickListener { view ->
             val downloadUrl: String =
-                "http://app-client.oss-cn-hangzhou.aliyuncs.com/oem/android/zdb_v1.0.3_20180125_2243.apk"
+//                "http://app-client.oss-cn-hangzhou.aliyuncs.com/oem/android/zdb_v1.0.3_20180125_2243.apk"
+//            https://app-client.oss-cn-hangzhou.aliyuncs.com/oem/android/sdb_v3.2.7_20200702_1526.apk
+                "https://app-client.oss-cn-hangzhou.aliyuncs.com/oem/android/sdb_v3.2.7_20200702_1526.apk"
             mCheckVersionPresenter!!.reqCheckVersion(this, downloadUrl)
         }
     }

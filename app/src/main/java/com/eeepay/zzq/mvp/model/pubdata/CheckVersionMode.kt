@@ -27,7 +27,7 @@ class CheckVersionMode(owner: LifecycleOwner) : BaseModel(owner),
         resultCallBack: IBaseContract.IResultProgressCallBack<String>?
     ) {
         checkNotNull(resultCallBack, { "=== resultCallBack is null===" })
-        val destPath: String = "/sdcard/" + "test.apk"
+        val destPath: String = "/sdcard/aaabbb/" + "test.apk"
         val length: Long = File(destPath).length() //已下载的文件长度
         RxHttp.get(downloadUrl)
             .setRangeHeader(length, true)  //设置开始下载位置，结束位置默认为文件末尾
@@ -44,7 +44,7 @@ class CheckVersionMode(owner: LifecycleOwner) : BaseModel(owner),
             }, { error ->
                 val errorInfo = ErrorInfo(error)//错误信息
                 //下载失败，处理相关逻辑
-                resultCallBack.onFailure(errorInfo.getErrorCode().toString(), errorInfo.errorMsg)
+                resultCallBack.onFailure(errorInfo.errorCode.toString(), errorInfo.errorMsg)
             })
 
     }
