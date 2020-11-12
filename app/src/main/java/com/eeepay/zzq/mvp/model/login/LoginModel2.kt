@@ -10,7 +10,10 @@ import com.eeepay.zzq.parse.ErrorInfo
 import com.eeepay.zzq.utils.EncRSA
 import com.eeepay.zzq.utils.FastSharedPreferencesTools
 import com.rxjava.rxlife.lifeOnMain
+import com.rxlife.coroutine.RxLifeScope
 import rxhttp.RxHttp
+import rxhttp.async
+import rxhttp.toList
 
 /**
  * 描述：登录请求的Model
@@ -19,7 +22,7 @@ import rxhttp.RxHttp
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class LoginModel(owner: LifecycleOwner) : BaseModel(owner),
+class LoginModel2(owner: LifecycleOwner) : BaseModel(owner),
     IModelContract.ILoginModel<LoginktInfo.Data> {
     override fun reqLogin(
         userName: String,
@@ -48,4 +51,20 @@ class LoginModel(owner: LifecycleOwner) : BaseModel(owner),
                 }
             )
     }
+
+
+     fun reqLogin(userName:String,password:String) = RxLifeScope().launch {
+         val encBase64Pass = EncRSA.EncBase64Pass(password) //RSA 加密密码
+         /** ------注释说明-参数的封装-------  */
+         /** ------注释说明-参数的封装-------  */
+         mParams.run {
+             put("userName", userName)
+             put("password", encBase64Pass) //RSA加密后的密码
+             val lib_team_id = "110010"//组织id
+             put("agentOem", lib_team_id) //代理商oem值 盛代宝为200010
+         }
+         RxHttp.postJson(Api.API_LOGIN_URL).addAll(mParams).toList<LoginktInfo.Data>().async(this).await()
+
+    }
+
 }

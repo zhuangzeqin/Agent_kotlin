@@ -14,7 +14,7 @@ interface IModelContract : IBaseContract {
     //登录model 接口
     interface ILoginModel<T> {
         //登录接口
-        fun reqLogin(
+         fun reqLogin(
             @NonNull userName: String,
             @NonNull password: String,
             @NonNull resultCallBack: IBaseContract.IResultCallBack<T>?

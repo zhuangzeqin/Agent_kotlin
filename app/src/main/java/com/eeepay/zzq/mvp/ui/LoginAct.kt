@@ -12,6 +12,8 @@ import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionView
 import com.eeepay.zzq.mvp.presenter.pubdata.IPublicDataView
 import com.eeepay.zzq.mvp.presenter.pubdata.PubDataPresenter
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * 描述：class describe
@@ -31,7 +33,16 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
 
     override fun eventOnClick() {
         btn_login.setOnClickListener { view ->
-            getPresenter().login(this, "18681490423", "123456")
+//            getPresenter().login(this, "18681490423", "123456")
+
+
+            val langs = listOf("C","C++","Java","Python","JavaScript","cg","ca","c4","c1","c8")
+
+            langs
+                .filter{ it.startsWith("c")}
+                .sortedBy{ it }
+                .map{ it.toUpperCase() }
+                .forEach{ println(it) }
         }
         btn_getPub.setOnClickListener { view ->
             mPubDataPresenter?.getPubDataInfo(this)
@@ -55,6 +66,7 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
     }
 
     override fun initData() {
+        GlobalScope.launch {  }
 
     }
 

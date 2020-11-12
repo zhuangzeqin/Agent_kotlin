@@ -1,12 +1,9 @@
 package com.eeepay.zzq.agent_kotlin
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import com.eeepay.zzq.utils.ColorEnum
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -18,7 +15,25 @@ class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.eeepay.zzq.agent_kotlin", appContext.packageName)
+        //val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        //assertEquals("com.eeepay.zzq.agent_kotlin", appContext.packageName)
+//        computeRunTime {
+//            (0..10000000).asSequence()
+//                .map { it + 1 }
+//                .filter { it % 2 == 0 }
+//                .count { it < 10 }
+//                .run {
+//                    println("by using list way, result is : $this")
+//                }
+//        }
+
+        println("ColorEnum.RED.color${ColorEnum.RED.color}")
+    }
+
+    //不使用Sequences序列，使用普通的集合操作
+    fun computeRunTime(action: (() -> Unit)?) {
+        val startTime = System.currentTimeMillis()
+        action?.invoke()
+        println("the code run time is ${System.currentTimeMillis() - startTime}")
     }
 }
