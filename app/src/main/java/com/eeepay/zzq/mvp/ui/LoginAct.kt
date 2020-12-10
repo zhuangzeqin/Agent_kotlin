@@ -55,6 +55,7 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
                 "https://app-client.oss-cn-hangzhou.aliyuncs.com/oem/android/sdb_v3.2.7_20200702_1526.apk"
             mCheckVersionPresenter!!.reqCheckVersion(this, downloadUrl)
         }
+
     }
 
     override fun getContentView(): Int {

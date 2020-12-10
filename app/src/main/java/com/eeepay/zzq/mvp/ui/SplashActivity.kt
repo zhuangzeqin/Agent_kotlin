@@ -5,6 +5,7 @@ import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
 import com.eeepay.zzq.mvp.presenter.base.BasePresenter
 import com.eeepay.zzq.mvp.presenter.base.interfaces.IBaseView
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.*
 
 /**
@@ -31,31 +32,29 @@ class SplashActivity:BaseMvpActivity<BasePresenter<IBaseView>>(), CoroutineScope
 //            async { goToSplash() }
 //        }
 
-        val launch = GlobalScope.launch(Dispatchers.Main) {//切换到Main线程执行
-//            delay(2000)
-            withContext(Dispatchers.IO)
-            {
-                testSync()
-            }
-            withContext(Dispatchers.IO)
-            {
-                testAsync()
-            }
-            //通过withContext函数实现多线程的协作
-//            withContext()
-//            goToSplash()
-        }
+//        val launch = GlobalScope.launch(Dispatchers.Main) {//切换到Main线程执行
+////            delay(2000)
+//            withContext(Dispatchers.IO)
+//            {
+//                testSync()
+//            }
+//            withContext(Dispatchers.IO)
+//            {
+//                testAsync()
+//            }
+//            //通过withContext函数实现多线程的协作
+////            withContext()
+////            goToSplash()
+//        }
 
-        goToLogin()
+        goToSplash()
 
     }
 
-    suspend fun goToSplash() {
-         delay(2000)
-         goActivity(this, LoginAct::class.java)
-//        splash_iv.postDelayed( {
-//            goActivity(this, LoginAct::class.java)
-//        },2000)
+     fun goToSplash() {
+         splash_iv.postDelayed( {
+            goActivity(this, LoginAct::class.java)
+        },2000)
     }
     //runBlocking启动的协程任务会阻断当前线程，直到该协程执行结束。
     fun goToLogin()= runBlocking(Dispatchers.IO) {

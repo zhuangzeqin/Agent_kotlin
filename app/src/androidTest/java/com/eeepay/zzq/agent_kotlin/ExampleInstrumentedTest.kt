@@ -1,7 +1,6 @@
 package com.eeepay.zzq.agent_kotlin
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.eeepay.zzq.utils.ColorEnum
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -12,8 +11,10 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+
     @Test
     fun useAppContext() {
+//        var i :Int?
         // Context of the app under test.
         //val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         //assertEquals("com.eeepay.zzq.agent_kotlin", appContext.packageName)
@@ -27,7 +28,12 @@ class ExampleInstrumentedTest {
 //                }
 //        }
 
-        println("ColorEnum.RED.color${ColorEnum.RED.color}")
+//        println("ColorEnum.RED.color${i!!.toString()}")
+
+        for (i  in 1..10 step 2)
+        {
+            println("$i")
+        }
     }
 
     //不使用Sequences序列，使用普通的集合操作
