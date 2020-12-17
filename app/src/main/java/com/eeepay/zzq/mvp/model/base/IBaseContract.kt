@@ -17,6 +17,7 @@ interface IBaseContract {
          */
         fun onSucess(response: T)
 
+
         /**
          * 失败时将结错误信息回调出去
          */

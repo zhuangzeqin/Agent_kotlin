@@ -44,6 +44,7 @@ class RxMainAct : BaseMvpActivity<BasePresenter<IBaseView>>() {
      * 初始化数据
      */
     override fun initData() {
+
         //标题创建一个不可变的list
         val title = listOf<String>("首页", "数据", "应用", "我的")
         val mutableListOf = mutableListOf<Fragment>()

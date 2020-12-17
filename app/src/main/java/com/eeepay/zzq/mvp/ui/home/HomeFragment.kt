@@ -10,6 +10,9 @@ import com.eeepay.zzq.mvp.presenter.index.LoadCurrDayDataPresenter
 import com.eeepay.zzq.mvp.presenter.index.LoadCurrDayDataView
 import com.eeepay.zzq.mvp.presenter.index.QueryMerchantParamsPresenter
 import com.eeepay.zzq.mvp.presenter.index.QueryMerchantParamsView
+import com.eeepay.zzq.mvp.presenter.login.ILoginView
+import com.eeepay.zzq.mvp.presenter.login.LoginPresenter2
+import com.eeepay.zzq.utils.PreferenceUtils
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -19,11 +22,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-@CreatePresenter(presenter = [LoadCurrDayDataPresenter::class, QueryMerchantParamsPresenter::class])
+@CreatePresenter(presenter = [LoadCurrDayDataPresenter::class, QueryMerchantParamsPresenter::class, LoginPresenter2::class])
 class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDataView,
-    QueryMerchantParamsView {
+    QueryMerchantParamsView, ILoginView {
     @PresenterVariable
     lateinit var mQueryMerchantParamsPresenter:QueryMerchantParamsPresenter
+    @PresenterVariable
+    lateinit var mLoginPresenter:LoginPresenter2
     /**
      * 创建实例
      */
@@ -50,6 +55,7 @@ class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDat
 
         home_btn_data1.setOnClickListener { view ->
             getPresenter().getLoadCurrDayData(this)
+            mLoginPresenter.login(this, "18681490423", "123456")
         }
         home_btn_data2.setOnClickListener { view ->
             mQueryMerchantParamsPresenter.getQueryMerchantParams(this)
@@ -62,5 +68,11 @@ class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDat
 
     override fun showQueryMerchantParams(message: String) {
         showError(message)
+    }
+
+    override fun onLoginSuccess(msg: String) {
+        val instance = PreferenceUtils.getInstance(mContext)
+        PreferenceUtils.saveParam("zzq",msg)
+        showError(msg)
     }
 }

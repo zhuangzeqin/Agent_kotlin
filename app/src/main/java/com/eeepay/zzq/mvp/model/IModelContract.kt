@@ -1,6 +1,7 @@
 package com.eeepay.zzq.mvp.model
 
 import com.eeepay.zzq.mvp.model.base.IBaseContract
+import com.eeepay.zzq.mvp.model.base.OnCallbackImpl2
 import rxhttp.wrapper.annotations.NonNull
 
 /**
@@ -18,6 +19,15 @@ interface IModelContract : IBaseContract {
             @NonNull userName: String,
             @NonNull password: String,
             @NonNull resultCallBack: IBaseContract.IResultCallBack<T>?
+        )
+    }
+
+    interface ILoginModel2<T> {
+        //登录接口
+         fun reqLogin(
+            @NonNull userName: String,
+            @NonNull password: String,
+            @NonNull  callback: OnCallbackImpl2<T>?
         )
     }
 
