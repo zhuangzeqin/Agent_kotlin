@@ -3,6 +3,9 @@ package com.eeepay.zzq.agent_kotlin
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -35,13 +38,29 @@ class ExampleInstrumentedTest {
 //            println("$i")
 //        }
 //        testRun()
-        val listOf = listOf<String>("1", "2")
-        //由于当条件为 true 时，最终结果返回的是 this，因此可以进行链式操作：
-        //takeIf  :   接收一个判断条件表达式，如果判断表达式为true则返回 对象本身，false返回 null
-       // takeUnless:  与takeIf相反,  如果判断表达式为true则返回 null，false返回 对象本身
-        listOf.takeIf { listOf.isEmpty()}?.let { println("${it.size}") }
-        listOf.takeUnless { listOf.isEmpty()}?.let { println("${it.size}") }
+//        val listOf = listOf<String>("1", "2")
+//        //由于当条件为 true 时，最终结果返回的是 this，因此可以进行链式操作：
+//        //takeIf  :   接收一个判断条件表达式，如果判断表达式为true则返回 对象本身，false返回 null
+//       // takeUnless:  与takeIf相反,  如果判断表达式为true则返回 null，false返回 对象本身
+//        listOf.takeIf { listOf.isEmpty()}?.let { println("${it.size}") }
+//        listOf.takeUnless { listOf.isEmpty()}?.let { println("${it.size}") }
+
+        val stringToDate = getStringToDate("8")
+        println("stringToDate = ${stringToDate}")
     }
+
+    //将字符串转换为时间戳
+    fun getStringToDate(time: String?): Long {
+        val sf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        var date = Date()
+        try {
+            date = sf.parse(time)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return date.getTime()
+    }
+
 
     //不使用Sequences序列，使用普通的集合操作
     fun computeRunTime(action: (() -> Unit)?) {

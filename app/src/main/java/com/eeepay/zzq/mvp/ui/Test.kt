@@ -34,7 +34,10 @@ class Test {
 
     fun fun4(f: intFun) {
         f(4)
+
+
     }
+
 
 
 }

@@ -24,6 +24,13 @@
         android:gravity="center"
         android:text="获取首页数据2" />
 
+    <Button
+        android:id="@+id/home_btn_data3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="kotlin builder 模式" />
+
     <TextView
         android:id="@+id/home_txt_msg"
         android:layout_width="match_parent"

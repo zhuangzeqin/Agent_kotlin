@@ -90,6 +90,7 @@ class DataFragment : BaseMvpFragment<BasePresenter<IBaseView>>() {
          * 如果同时处理多个耗时任务，且这几个任务都无相互依赖时，可以使用 async ...  await() 来处理，将上面的例子改为 async 来实现如下 ：
          */
         btn_async.setOnClickListener {
+            MainScope()
             GlobalScope.launch {
                 val time1 = System.currentTimeMillis()
                 val task1 = async {

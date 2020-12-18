@@ -14,6 +14,8 @@ import com.eeepay.zzq.mvp.presenter.login.ILoginView
 import com.eeepay.zzq.mvp.presenter.login.LoginPresenter2
 import com.eeepay.zzq.utils.PreferenceUtils
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * 描述：首页
@@ -26,9 +28,11 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDataView,
     QueryMerchantParamsView, ILoginView {
     @PresenterVariable
-    lateinit var mQueryMerchantParamsPresenter:QueryMerchantParamsPresenter
+    lateinit var mQueryMerchantParamsPresenter: QueryMerchantParamsPresenter
+
     @PresenterVariable
-    lateinit var mLoginPresenter:LoginPresenter2
+    lateinit var mLoginPresenter: LoginPresenter2
+
     /**
      * 创建实例
      */
@@ -50,7 +54,7 @@ class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDat
      * 初始化
      */
     override fun init() {
-       val title = mBundle!!.getString(UrlConfitkt.BUNDLE_TITLE)
+        val title = mBundle!!.getString(UrlConfitkt.BUNDLE_TITLE)
         home_txt_msg.text = title
 
         home_btn_data1.setOnClickListener { view ->
@@ -59,6 +63,50 @@ class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDat
         }
         home_btn_data2.setOnClickListener { view ->
             mQueryMerchantParamsPresenter.getQueryMerchantParams(this)
+        }
+        home_btn_data3.setOnClickListener {
+//            SimpleBuilder.Builder().setTag("zhuangzeqin").setResultCallBack(object :SimpleBuilder.ResultCallBack{
+////                override fun onSucceed(tag: String?, data: String?) {
+////                    Toast.makeText(mContext, tag.plus(data), Toast.LENGTH_SHORT).show()
+////                }
+////
+////                override fun onFailure(tag: String?, msg: String?) {
+////                    Toast.makeText(mContext, tag.plus("onFailure"), Toast.LENGTH_SHORT).show()
+////                }
+////            }).build().start()
+
+            val stringToDate = parseServerTime("8")
+            println("stringToDate = ${stringToDate}")
+
+            val stringToDate2 = parseServerTime(System.currentTimeMillis().toString())
+            println("stringToDate = ${stringToDate2}")
+        }
+    }
+
+    //将字符串转换为时间戳
+    fun getStringToDate(time: String?): Long {
+//        val sf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        try {
+            var date = Date(time)
+//            date = sf.parse(time)
+            return date.getTime()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return 0
+        }
+//        return date.getTime()
+    }
+
+    fun parseServerTime(time: String?): Boolean {
+        var sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINESE);
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        var date = Date()
+        try {
+            date = sdf.parse(time);
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
         }
     }
 
@@ -72,7 +120,7 @@ class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDat
 
     override fun onLoginSuccess(msg: String) {
         val instance = PreferenceUtils.getInstance(mContext)
-        PreferenceUtils.saveParam("zzq",msg)
+        PreferenceUtils.saveParam("zzq", msg)
         showError(msg)
     }
 }
