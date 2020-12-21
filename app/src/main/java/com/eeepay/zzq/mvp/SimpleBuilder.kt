@@ -7,12 +7,17 @@ package com.eeepay.zzq.mvp
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
+typealias intSucceedFun = (String?, Any?) -> Unit?//别名 放在类头部
+typealias intFailureFun = (String?, String?) -> Unit?//别名放在类头部
+
 class SimpleBuilder private constructor(mBuilder: Builder) {
-    //private constructor(mBuilder: Builder) 私有的构造函数 放在类后面
-    private var mTag: String? = null// TAG 标签
+    //private constructor(mBuilder: Builder)
+    //typealias intSucceedFun = (String?, Any?) -> Unit?//别名 放在类头部
+    //typealias intFailureFun = (String?, String?) -> Unit?//别名放在类头部
     //将结果返回给外部调用者使用 使用lambda表达式替代匿名内部类实现。
-    private var onSucceed: (String?, Any?) -> Unit? = { tag: String?, T: Any? -> }
-    private var onFailure: (String?, String?) -> Unit? = { tag: String?, msg: String? -> }
+    private var onSucceed: intSucceedFun = { tag: String?, T: Any? -> }
+    private var onFailure: intFailureFun = { tag: String?, msg: String? -> }
+    private var mTag: String? = null// TAG 标签
 
     /**
      * 初始化操作
@@ -28,9 +33,10 @@ class SimpleBuilder private constructor(mBuilder: Builder) {
      */
     class Builder {
         var tag: String? = null// TAG 标签
+
         //使用lambda表达式替代匿名内部类实现。
-        var onSucceedVel: (String?, Any?) -> Unit? = { tag: String?, T: Any? -> }
-        var onFailureVel: (String?, String?) -> Unit? = { tag: String?, msg: String? -> }
+        var onSucceedVel: intSucceedFun = { tag: String?, T: Any? -> }
+        var onFailureVel: intFailureFun = { tag: String?, msg: String? -> }
 
         /**
          * 设置tag
@@ -44,8 +50,8 @@ class SimpleBuilder private constructor(mBuilder: Builder) {
          * 设置回调接口
          */
         fun setResultCallBack(
-            onSucceedVal: (String?, Any?) -> Unit?,
-            onFailureVal: (String?, String?) -> Unit?
+            onSucceedVal: intSucceedFun,
+            onFailureVal: intFailureFun
         ): Builder {
             this.onSucceedVel = onSucceedVal
             this.onFailureVel = onFailureVal
@@ -69,7 +75,8 @@ class SimpleBuilder private constructor(mBuilder: Builder) {
         checkNotNull(onSucceed) { "===onSucceed is null,you can must implement.===" }
         checkNotNull(onFailure) { "===onFailure is null,you can must implement.===" }
         println("mTag = ${mTag}")
-        onSucceed(mTag, mTag as String)
+        onSucceed(mTag, mTag)
         onFailure(mTag, mTag)
     }
+
 }
