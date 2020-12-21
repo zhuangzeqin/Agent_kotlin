@@ -1,9 +1,11 @@
 package com.eeepay.zzq.mvp.ui.home
 
 import android.os.Bundle
+import android.widget.Toast
 import com.eeepay.zzq.UrlConfitkt
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpFragment
+import com.eeepay.zzq.mvp.SimpleBuilder
 import com.eeepay.zzq.mvp.presenter.base.CreatePresenter
 import com.eeepay.zzq.mvp.presenter.base.PresenterVariable
 import com.eeepay.zzq.mvp.presenter.index.LoadCurrDayDataPresenter
@@ -75,11 +77,18 @@ class HomeFragment : BaseMvpFragment<LoadCurrDayDataPresenter>(), LoadCurrDayDat
 ////                }
 ////            }).build().start()
 
-            val stringToDate = parseServerTime("8")
-            println("stringToDate = ${stringToDate}")
+            SimpleBuilder.Builder().setTag("zhuangzeqin")
+                .setResultCallBack({ s: String?, any: Any? ->
+                    Toast.makeText(mContext, s.plus(any.toString()), Toast.LENGTH_SHORT).show()
+                },
+                    { s: String?, s2: String? ->
+                        Toast.makeText(
+                            mContext,
+                            s.plus("onFailure" + s2.toString()),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }).build().start()
 
-            val stringToDate2 = parseServerTime(System.currentTimeMillis().toString())
-            println("stringToDate = ${stringToDate2}")
         }
     }
 

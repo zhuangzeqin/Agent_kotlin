@@ -10,14 +10,17 @@ package com.eeepay.zzq.mvp
 class SimpleBuilder private constructor(mBuilder: Builder) {
     //private constructor(mBuilder: Builder) 私有的构造函数 放在类后面
     private var mTag: String? = null// TAG 标签
-    private var mResultCallBack: ResultCallBack? = null//回调接口
+    //将结果返回给外部调用者使用 使用lambda表达式替代匿名内部类实现。
+    private var onSucceed: (String?, Any?) -> Unit? = { tag: String?, T: Any? -> }
+    private var onFailure: (String?, String?) -> Unit? = { tag: String?, msg: String? -> }
 
     /**
      * 初始化操作
      */
     init {
-        mTag = mBuilder.tag
-        mResultCallBack = mBuilder.resultCallBack
+        this.mTag = mBuilder.tag
+        this.onSucceed = mBuilder.onSucceedVel
+        this.onFailure = mBuilder.onFailureVel
     }
 
     /**
@@ -25,7 +28,9 @@ class SimpleBuilder private constructor(mBuilder: Builder) {
      */
     class Builder {
         var tag: String? = null// TAG 标签
-        var resultCallBack: ResultCallBack? = null//回调接口
+        //使用lambda表达式替代匿名内部类实现。
+        var onSucceedVel: (String?, Any?) -> Unit? = { tag: String?, T: Any? -> }
+        var onFailureVel: (String?, String?) -> Unit? = { tag: String?, msg: String? -> }
 
         /**
          * 设置tag
@@ -38,8 +43,12 @@ class SimpleBuilder private constructor(mBuilder: Builder) {
         /**
          * 设置回调接口
          */
-        fun setResultCallBack(resultCallBack: ResultCallBack?): Builder {
-            this.resultCallBack = resultCallBack
+        fun setResultCallBack(
+            onSucceedVal: (String?, Any?) -> Unit?,
+            onFailureVal: (String?, String?) -> Unit?
+        ): Builder {
+            this.onSucceedVel = onSucceedVal
+            this.onFailureVel = onFailureVal
             return this
         }
 
@@ -57,18 +66,10 @@ class SimpleBuilder private constructor(mBuilder: Builder) {
      * 开始请求数据
      */
     fun start() {
-        checkNotNull(mResultCallBack) { "===ResultCallBack is null,you can must implement.===" }
+        checkNotNull(onSucceed) { "===onSucceed is null,you can must implement.===" }
+        checkNotNull(onFailure) { "===onFailure is null,you can must implement.===" }
         println("mTag = ${mTag}")
-        mResultCallBack!!.onSucceed(mTag, mTag)
-        mResultCallBack!!.onFailure(mTag, mTag)
-    }
-
-    /**
-     * 将结果返回给外部调用者使用
-     */
-    interface ResultCallBack {
-        //外围实现这个接口的时候
-        fun onSucceed(tag: String?, data: String?) //成功
-        fun onFailure(tag: String?, msg: String?) //失败
+        onSucceed(mTag, mTag as String)
+        onFailure(mTag, mTag)
     }
 }
