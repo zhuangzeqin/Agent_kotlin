@@ -1,16 +1,16 @@
 package com.eeepay.zzq.mvp
 
 /**
- * 描述：class describe
+ * 描述：Builder 构建模式
  * 作者：zhuangzeqin
  * 时间: 2020/12/18-14:25
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class SimpleBuilder constructor(mBuilder: Builder) {
-    //constructor(mBuilder: Builder) 私有的构造函数 放在类后面
-    var mTag: String? = null// TAG 标签
-    var mResultCallBack: ResultCallBack? = null//回调接口
+class SimpleBuilder private constructor(mBuilder: Builder) {
+    //private constructor(mBuilder: Builder) 私有的构造函数 放在类后面
+    private var mTag: String? = null// TAG 标签
+    private var mResultCallBack: ResultCallBack? = null//回调接口
 
     /**
      * 初始化操作
