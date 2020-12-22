@@ -28,4 +28,49 @@ object CarFactory {
         println("new-energy car use ${nCar.name}")
     }
 
+
+    interface Fruits {
+        fun showName()
+    }
+
+    class Lemon(private val strType: String) : Fruits {
+        override fun showName() {
+            println("当前构建对象是：$strType")
+        }
+    }
+
+    class Pear(private val strType: String) : Fruits by Lemon(strType)
+    class Watermelon(private val strType: String) : Fruits by Lemon(strType)
+
+    /**
+     * 创建工厂
+     */
+    class FruitsFactory {
+        fun createType(type: String): Fruits? {
+            return when (type) {
+                "Pear" -> {
+                    Pear(type)
+                }
+                "Watermelon" -> {
+                    Watermelon(type)
+                }
+                "Lemon" -> {
+                    Lemon(type)
+                }
+                else -> null
+            }
+        }
+    }
+
+
+    fun main2() {
+        val lemon = FruitsFactory().createType("Lemon")
+        lemon?.showName()
+        val watermelon = FruitsFactory().createType("Watermelon")
+        watermelon?.showName()
+        val pear = FruitsFactory().createType("Pear")
+        pear?.showName()
+    }
+
+
 }
