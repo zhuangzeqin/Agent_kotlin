@@ -1,6 +1,8 @@
 package com.eeepay.zzq.agent_kotlin
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.eeepay.zzq.factory.CarFactory
+import com.eeepay.zzq.factory.CarType
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.text.ParseException
@@ -45,8 +47,14 @@ class ExampleInstrumentedTest {
 //        listOf.takeIf { listOf.isEmpty()}?.let { println("${it.size}") }
 //        listOf.takeUnless { listOf.isEmpty()}?.let { println("${it.size}") }
 
-        val stringToDate = getStringToDate("8")
-        println("stringToDate = ${stringToDate}")
+//        val stringToDate = getStringToDate("8")
+//        println("stringToDate = ${stringToDate}")
+
+
+        val tCar = CarFactory(CarType.BCar)
+        val nCar = CarFactory(CarType.DCar)
+        println("traditional car use ${tCar.name}")
+        println("new-energy car use ${nCar.name}")
     }
 
     //将字符串转换为时间戳
