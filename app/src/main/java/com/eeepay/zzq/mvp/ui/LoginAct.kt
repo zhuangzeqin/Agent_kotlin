@@ -1,5 +1,6 @@
 package com.eeepay.zzq.mvp.ui
 
+import android.widget.Toast
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
 import com.eeepay.zzq.bean.PubDataktInfo
@@ -11,6 +12,7 @@ import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionPresenter
 import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionView
 import com.eeepay.zzq.mvp.presenter.pubdata.IPublicDataView
 import com.eeepay.zzq.mvp.presenter.pubdata.PubDataPresenter
+import com.eeepay.zzq.utils.PreferenceUtils
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,20 +34,23 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
     var mCheckVersionPresenter: CheckVersionPresenter? = null
 
     override fun eventOnClick() {
+        val instance = PreferenceUtils.getInstance(this)
         btn_login.setOnClickListener { view ->
 //            getPresenter().login(this, "18681490423", "123456")
+            PreferenceUtils.saveParam("zzq","ok_value")
 
-
-            val langs = listOf("C","C++","Java","Python","JavaScript","cg","ca","c4","c1","c8")
-
-            langs
-                .filter{ it.startsWith("c")}
-                .sortedBy{ it }
-                .map{ it.toUpperCase() }
-                .forEach{ println(it) }
+//            val langs = listOf("C","C++","Java","Python","JavaScript","cg","ca","c4","c1","c8")
+//
+//            langs
+//                .filter{ it.startsWith("c")}
+//                .sortedBy{ it }
+//                .map{ it.toUpperCase() }
+//                .forEach{ println(it) }
         }
         btn_getPub.setOnClickListener { view ->
-            mPubDataPresenter?.getPubDataInfo(this)
+//            mPubDataPresenter?.getPubDataInfo(this)
+            val str = PreferenceUtils.getStringParam("zzq")
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
         }
         //升级断点下载测试demo
         btn_download.setOnClickListener { view ->
