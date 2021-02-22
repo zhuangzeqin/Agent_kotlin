@@ -26,6 +26,8 @@
             android:id="@+id/btn_getPub"
             android:gravity="center"
             android:text="获取公共数据"
+            android:textColor="@color/white"
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

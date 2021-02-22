@@ -1,6 +1,6 @@
 package com.eeepay.zzq.mvp.ui
 
-import android.widget.Toast
+import android.graphics.Color
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
 import com.eeepay.zzq.bean.PubDataktInfo
@@ -49,8 +49,12 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
         }
         btn_getPub.setOnClickListener { view ->
 //            mPubDataPresenter?.getPubDataInfo(this)
-            val str = PreferenceUtils.getStringParam("zzq")
-            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+//            val str = PreferenceUtils.getStringParam("zzq")
+//            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
+//            goActivity<RxMainAct>(this)
+
+            goActivity<CoroutineActivity>(this)
+
         }
         //升级断点下载测试demo
         btn_download.setOnClickListener { view ->
@@ -68,6 +72,7 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
     }
 
     override fun initView() {
+        btn_getPub.setRoundRectBg(Color.parseColor("#0094ff"),50)
 
     }
 

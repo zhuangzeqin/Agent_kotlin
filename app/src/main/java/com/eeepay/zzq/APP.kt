@@ -27,5 +27,7 @@ class APP : Application() {
         RxHttpManager.init()
         //初始化ToastUtils
         ToastUtils.setGravity(Gravity.CENTER, 0, 0)
+
+
     }
 }

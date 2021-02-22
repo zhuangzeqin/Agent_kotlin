@@ -5,6 +5,8 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -28,6 +30,10 @@ import com.eeepay.zzq.utils.ActivityStackManager
 import com.eeepay.zzq.utils.ToastUtils
 import com.eeepay.zzq.utils.statusbarstool.StatusBarUtil
 import com.eeepay.zzq.view.DialogHelper
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
 import pub.devrel.easypermissions.EasyPermissions
 import rxhttp.wrapper.annotations.NonNull
 
@@ -38,9 +44,11 @@ import rxhttp.wrapper.annotations.NonNull
  * 邮箱：zzq@eeepay.cn
  * 备注:
  * //out即java中的<? extends T> 意为仅可作为返回值，返回值类型是T或T的子类
-  //in即java中的<? super T> 意为仅可作为参数传入，传入的参数类型是T或T的子类
+//in即java中的<? super T> 意为仅可作为参数传入，传入的参数类型是T或T的子类
  */
-abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompatActivity(), IBaseView {
+abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompatActivity(),
+    CoroutineScope by MainScope(),
+    IBaseView {
     protected val TAG = BaseMvpActivity::class.java.simpleName//TAG 标签贴
 
     /**
@@ -121,6 +129,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
         mPresenterDispatch!!.onDestroyPresenter<P>()
         ActivityStackManager.getInstance().remove(this)
         AppBus.getInstance().unregister(this) //订阅事件
+        cancel()
         super.onDestroy()
     }
 
@@ -144,7 +153,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
     }
 
     override fun showError(error: String?) {
-        error?.let { ToastUtils.showShort(it)}
+        error?.let { ToastUtils.showShort(it) }
     }
 
     /**
@@ -233,6 +242,15 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
         }
     }
 
+
+    /**
+     * reified,kotlin中的泛型实化关键字，使抽象的东西更加具体或真实。
+     * 扩展一个函数  goActivity<RxMainAct>(this);简单的跳转不带任何的参数设置
+     */
+    inline fun <reified T : Activity> Activity.goActivity(context: Context) {
+//        startActivity(Intent(context, T::class.java))
+        goActivity(context, T::class.java)
+    }
 
     /**
      * ------获取 presenter 提供者--------
@@ -331,6 +349,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
             Log.d(TAG, "mToolbar 控件为空")
         }
     }
+
     /**
      * 设置右边中间标
      *
@@ -350,6 +369,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
             }
         })
     }
+
     /**
      * 设置标题右边图标和点击事件
      *
@@ -366,6 +386,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
         mTitle!!.setCompoundDrawables(null, null, drawable, null)
         mTitle!!.compoundDrawablePadding = 10 //设置图片和text之间的间距
     }
+
     /**
      * 是否显示返回图标
      *
@@ -378,6 +399,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
             mBack!!.visibility = View.GONE
         }
     }
+
     /**
      * 是否显示Toolbar
      *
@@ -390,6 +412,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
             mToolbar!!.visibility = View.GONE
         }
     }
+
     /**
      * 设置左边图标
      *
@@ -401,6 +424,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
         drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
         mBack!!.setCompoundDrawables(null, null, drawable, null)
     }
+
     /**
      * 设置右边图标
      *
@@ -412,6 +436,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
         drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
         mRightTitle!!.setCompoundDrawables(null, null, drawable, null)
     }
+
     /**
      * 设置右边图标
      *
@@ -431,6 +456,7 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
             }
         })
     }
+
     /**
      * 设置右边图标
      *
@@ -450,6 +476,20 @@ abstract class BaseMvpActivity<out P : BasePresenter<out IBaseView>> : AppCompat
             })
         }
     }
+
+    /**
+     * 对于需要自定义背景的View,直接调用setRoundRectBg即可，简单方便
+     */
+    fun View.setRoundRectBg(color: Int = Color.WHITE, cornerRadius: Int = 15) {
+        background = GradientDrawable().apply {
+            setColor(color)
+            setCornerRadius(cornerRadius.toFloat())
+        }
+    }
+
+    /** Kotlin代码中，我们可以反序列化JSON字符串，甚至根本不需要传递类型信息
+     *  val user: User = Gson().fromJson(json)**/
+    inline fun <reified T> Gson.fromJson(json: String) = fromJson(json, T::class.java)
 
     /**
      * 布局id
