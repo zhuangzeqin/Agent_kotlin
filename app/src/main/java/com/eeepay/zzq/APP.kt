@@ -2,11 +2,14 @@ package com.eeepay.zzq
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import com.eeepay.zzq.base.RxHttpManager
 import com.eeepay.zzq.utils.FastSharedPreferencesTools
+import com.eeepay.zzq.utils.ForegroundCallbacks
 import com.eeepay.zzq.utils.ToastUtils
 import com.eeepay.zzq.utils.Utils
+
 
 /**
  * 描述：class describe
@@ -16,6 +19,7 @@ import com.eeepay.zzq.utils.Utils
  * 备注:
  */
 class APP : Application() {
+    val tag = APP::class.java.simpleName
     //lateinit 不能用来修饰基本数据类型，因为基本类型的属性在类加载后的准备阶段都会被初始化为默认值
     //lateinit不能修饰val变量，只能修饰可变的属性
     lateinit var context: Context
@@ -27,7 +31,18 @@ class APP : Application() {
         RxHttpManager.init()
         //初始化ToastUtils
         ToastUtils.setGravity(Gravity.CENTER, 0, 0)
+//        ForegroundCallbacks().get(this)
+        ForegroundCallbacks().get(this)!!.addListener(object : ForegroundCallbacks.Listener {
+                override fun onBecameForeground() {
+//                    L.d("当前程序切换到前台")
+                    Log.d(tag,"${"当前程序切换到前台"}")
+                }
 
+                override fun onBecameBackground() {
+//                    L.d("当前程序切换到后台")
+                    Log.d(tag,"${"当前程序切换到后台"}")
+                }
+            })
 
     }
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graden"
+    app:startDestination="@id/loginFragment">
+<!--    app:startDestination，这是给导航指定起始位置的，必须要设置，不然会奔溃报错。-->
+    <fragment
+        android:id="@+id/loginFragment"
+        tools:layout="@layout/fragment_login"
+        android:name="com.eeepay.zzq.mvp.ui.navigation.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment3_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_coroutineActivity"
+            app:destination="@id/coroutineActivity" >
+            <argument
+                android:name="myArg"
+                app:argType="integer"
+                android:defaultValue="1" />
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        tools:layout="@layout/fragment_register"
+        android:name="com.eeepay.zzq.mvp.ui.navigation.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_mainListFragment"
+            app:destination="@id/mainListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainListFragment"
+        tools:layout="@layout/fragment_mainlist"
+        android:name="com.eeepay.zzq.mvp.ui.navigation.MainListFragment"
+        android:label="MainListFragment" />
+    <activity
+        android:id="@+id/coroutineActivity"
+        android:name="com.eeepay.zzq.mvp.ui.CoroutineActivity"
+        android:label="activity_coroutine"
+        tools:layout="@layout/activity_coroutine" >
+        <argument
+            android:name="myArg"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </activity>
+
+
+</navigation>

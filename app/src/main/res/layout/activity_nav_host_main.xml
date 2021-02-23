@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eeepay.zzq.mvp.ui.navigation.NavHostMainAct">
+    <!--    FragmentContainerView是一个特殊的Fragment，只能添加Fragment，
+    app:navGraph：这里需要指定前面在res文件夹下创建的navigation文件
+app:defaultNavHost="true"：代表可以拦截系统的返回键，用来托管路由
+android:name="androidx.navigation.fragment.NavHostFragment"：代表这个容器就是用来管理Fragment的容器
+FragmentContainerView内部会通过反射的方式，初始化名为name所指定的class——NavHostFragment，它就是所有需要管理的Fragment的Container。
+在NavHostFragment中，有两个重要的参数，即mGraphId和mDefaultNavHost，保存着我们从xml中解析出来的数据。同时，在onCreate的时候，创建了NavController，与mGraphId进行绑定。
+    -->
+    <!--<androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graden" >-->
+
+        <fragment
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:defaultNavHost="true"
+            />
+   <!--
+    app:navGraph="@navigation/nav_graden"
+   </androidx.fragment.app.FragmentContainerView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,9 @@ import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionPresenter
 import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionView
 import com.eeepay.zzq.mvp.presenter.pubdata.IPublicDataView
 import com.eeepay.zzq.mvp.presenter.pubdata.PubDataPresenter
+import com.eeepay.zzq.mvp.ui.navigation.NavHostMainAct
 import com.eeepay.zzq.utils.PreferenceUtils
+import com.eeepay.zzq.utils.WhitleActivityStackManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -52,8 +54,9 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
 //            val str = PreferenceUtils.getStringParam("zzq")
 //            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
 //            goActivity<RxMainAct>(this)
-
-            goActivity<CoroutineActivity>(this)
+//            goActivity<CoroutineActivity>(this)
+            WhitleActivityStackManager.getInstance().push(this);
+            goActivity<NavHostMainAct>(this)
 
         }
         //升级断点下载测试demo

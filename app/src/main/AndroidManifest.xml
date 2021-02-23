@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
-        <activity android:name="com.eeepay.zzq.mvp.ui.CoroutineActivity"></activity>
+        <activity android:name="com.eeepay.zzq.mvp.ui.navigation.NavHostMainAct"/>
+        <activity android:name="com.eeepay.zzq.mvp.ui.CoroutineActivity" />
         <activity android:name="com.eeepay.zzq.mvp.ui.LoginAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

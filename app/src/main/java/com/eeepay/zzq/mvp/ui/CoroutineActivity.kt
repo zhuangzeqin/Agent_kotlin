@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.mvp.presenter.CoroutinePresenter
+import com.eeepay.zzq.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_coroutine.*
 import kotlinx.coroutines.*
 
@@ -22,6 +23,9 @@ class CoroutineActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutine)
+        //在接收目的地的代码中，请使用 getArguments() 方法来检索 Bundle 并使用其内容：
+        val amount= intent.extras!!.getInt("amount", 0)
+        ToastUtils.showShort("" + amount)
         //runBlocking 顶层函数(在Kotlin中，函数站在了类的位置，我们可以直接把函数放在代码文件的顶层，让它不从属于任何类)
         //方法一通常适用于单元测试的场景，而业务开发中不会用到这种方法，因为它是线程阻塞的
         btn_runBlocking.setOnClickListener {

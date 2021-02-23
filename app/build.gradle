@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 //使用kapt依赖rxhttp-compiler，需要导入kapt插件
 apply plugin: 'kotlin-kapt'
+//如需生成适用于 Java 模块或 Java 和 Kotlin 混合模块的 Java 语言代码，请将以下行添加到应用或模块的 build.gradle 文件中：
+//apply plugin: "androidx.navigation.safeargs"
+//如需生成适用于 Kotlin 独有的模块的 Kotlin 代码，请添加以下行：
+//apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -118,5 +122,19 @@ dependencies {
 //    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
 ////添加Glide的依赖用于图片加载
 //    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    def nav_version = "2.3.3"
+    // Java language implementation
+//    implementation "androidx.navigation:navigation-fragment:$nav_version"
+//    implementation "androidx.navigation:navigation-ui:$nav_version"
+    // Kotlin Android架构组件-Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+//    mplementation "androidx.fragment:fragment-ktx:1.2.5"
+
+//    implementation 'androidx.navigation:navigation-fragment:2.2.1'
+//    implementation 'androidx.navigation:navigation-ui:2.2.1'
+//    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0"
+//    implementation "androidx.navigation:navigation-ui-ktx:2.3.0"
+
 
 }
