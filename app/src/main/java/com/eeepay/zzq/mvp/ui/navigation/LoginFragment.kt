@@ -1,11 +1,15 @@
 package com.eeepay.zzq.mvp.ui.navigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.eeepay.zzq.agent_kotlin.R
+import com.eeepay.zzq.mvp.ui.Countdown.CountdownAct
+import com.eeepay.zzq.mvp.ui.lifecycle.LifecycleTestActivity
+import com.eeepay.zzq.mvp.ui.viewmodel.UserActivity
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
@@ -32,6 +36,17 @@ class LoginFragment: Fragment(R.layout.fragment_login) {
             val amount  = 200
             val bundle = bundleOf("amount" to amount)
             Navigation.findNavController(it).navigate(R.id.action_loginFragment_to_coroutineActivity,bundle)
+        }
+
+        btn_time.setOnClickListener {
+            startActivity(Intent(activity, CountdownAct::class.java))
+        }
+        //lifecycle 生命感知的组件;非常简单；也非常好用；
+        btn_lifecycle.setOnClickListener {
+            startActivity(Intent(activity, LifecycleTestActivity::class.java))
+        } //lifecycle 生命感知的组件;非常简单；也非常好用；
+        btn_viewmodel.setOnClickListener {
+            startActivity(Intent(activity, UserActivity::class.java))
         }
     }
 }

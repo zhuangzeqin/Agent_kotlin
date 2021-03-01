@@ -20,6 +20,7 @@ import kotlinx.coroutines.*
   */
 class CoroutineActivity : AppCompatActivity() {
     val mainScope = MainScope()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coroutine)

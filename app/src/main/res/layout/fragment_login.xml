@@ -21,6 +21,28 @@
         android:gravity="center"
         android:text="跳转act" />
 
+    <Button
+        android:id="@+id/btn_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="倒计时" />
+
+    <Button
+        android:id="@+id/btn_lifecycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="lifecycle 组件" />
+
+
+    <Button
+        android:id="@+id/btn_viewmodel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="viewmodel 组件" />
+
 
 
     <TextView

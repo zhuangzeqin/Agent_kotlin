@@ -2,11 +2,11 @@ package com.eeepay.zzq
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import android.view.Gravity
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.eeepay.zzq.base.RxHttpManager
+import com.eeepay.zzq.mvp.ui.lifecycle.ApplicationLifecycleObserver
 import com.eeepay.zzq.utils.FastSharedPreferencesTools
-import com.eeepay.zzq.utils.ForegroundCallbacks
 import com.eeepay.zzq.utils.ToastUtils
 import com.eeepay.zzq.utils.Utils
 
@@ -31,18 +31,21 @@ class APP : Application() {
         RxHttpManager.init()
         //初始化ToastUtils
         ToastUtils.setGravity(Gravity.CENTER, 0, 0)
-//        ForegroundCallbacks().get(this)
-        ForegroundCallbacks().get(this)!!.addListener(object : ForegroundCallbacks.Listener {
-                override fun onBecameForeground() {
-//                    L.d("当前程序切换到前台")
-                    Log.d(tag,"${"当前程序切换到前台"}")
-                }
+        //注册App生命周期观察者
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(ApplicationLifecycleObserver())
 
-                override fun onBecameBackground() {
-//                    L.d("当前程序切换到后台")
-                    Log.d(tag,"${"当前程序切换到后台"}")
-                }
-            })
+//        ForegroundCallbacks().get(this)
+//        ForegroundCallbacks().get(this)!!.addListener(object : ForegroundCallbacks.Listener {
+//                override fun onBecameForeground() {
+////                    L.d("当前程序切换到前台")
+//                    Log.d(tag,"${"当前程序切换到前台"}")
+//                }
+//
+//                override fun onBecameBackground() {
+////                    L.d("当前程序切换到后台")
+//                    Log.d(tag,"${"当前程序切换到后台"}")
+//                }
+//            })
 
     }
 }
