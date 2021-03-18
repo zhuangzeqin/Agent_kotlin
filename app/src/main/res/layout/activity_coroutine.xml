@@ -8,27 +8,38 @@
 
     <Button
         android:id="@+id/btn_runBlocking"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="runBlocking 方式"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="runBlocking 方式"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btn_GlobalScope"
-        app:layout_constraintTop_toBottomOf="@id/btn_runBlocking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GlobalScope 方式"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="GlobalScope 方式"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_runBlocking" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:text="成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长成长"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_CoroutineScope" />
 
     <Button
         android:id="@+id/btn_CoroutineScope"
-        app:layout_constraintTop_toBottomOf="@id/btn_GlobalScope"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CoroutineScope 方式(推荐)"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="CoroutineScope 方式(推荐)"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_GlobalScope" />
 </androidx.constraintlayout.widget.ConstraintLayout>

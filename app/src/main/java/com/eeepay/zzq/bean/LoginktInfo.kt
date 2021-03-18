@@ -12,6 +12,8 @@ import java.io.Serializable
 class LoginktInfo : Serializable {
     //lateinit 不支持基本数据类型，例如Int. 针对基本数据类型实现方式你可以使用委托(delegate)类
 //    private var mNumber: Int by Delegates.notNull<Int>()
+//    Kotlin 允许使用 ` ` 把一个不合法的标识符强行合法化，当然本身是合法的也能用。 一般我们都只用于关键字冲突的情形，可你们一定没想到有这种妙用吧。
+
     data class LoginBean(
         val code: Int,
         val count: Int,

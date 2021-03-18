@@ -155,4 +155,12 @@ dependencies {
 //    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
     // 可选 - Test helpers for LiveData
 //    testImplementation "androidx.arch.core:core-testing:$arch_version"
+
+
+
+//    对于 ViewModelScope，请使用 androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0-beta01 或更高版本。
+
+//    对于 LifecycleScope，请使用 androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01 或更高版本。
+
+//    对于 liveData，请使用 androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01 或更高版本
 }

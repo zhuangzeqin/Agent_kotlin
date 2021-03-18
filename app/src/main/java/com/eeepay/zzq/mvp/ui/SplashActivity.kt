@@ -3,6 +3,7 @@ package com.eeepay.zzq.mvp.ui
 import android.util.Log
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
+import com.eeepay.zzq.kotlin.toast
 import com.eeepay.zzq.mvp.presenter.base.BasePresenter
 import com.eeepay.zzq.mvp.presenter.base.interfaces.IBaseView
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -25,6 +26,7 @@ class SplashActivity:BaseMvpActivity<BasePresenter<IBaseView>>(), CoroutineScope
      * 初始化操作
      */
     override fun initView() {
+        "".toast("");
         // //rxLifeScope在rxLife-coroutine库中，需要单独依赖
         //通过launch方法开启一个协程
 //        val emptyList = emptyList<String>()

@@ -18,8 +18,7 @@ import java.io.File
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class CheckVersionMode(owner: LifecycleOwner) : BaseModel(owner),
-    IModelContract.ICheckVersionMode<String> {
+class CheckVersionMode(owner: LifecycleOwner) : BaseModel(owner), IModelContract.ICheckVersionMode<String> {
 
     @SuppressLint("CheckResult")
     override fun reqcheckVersion(

@@ -20,6 +20,7 @@ class QueryMerchantParamsModel(owner: LifecycleOwner) : BaseModel(owner),
     IModelContract.IQueryMerchantParamsModel<String> {
     override fun reqQueryMerchantParams(resultCallBack: IBaseContract.IResultCallBack<String>?) {
         checkNotNull(resultCallBack, { "=== resultCallBack is null===" })
+//        fun requestTokenAsync(): CompletableFuture<String> {  }
         RxHttp.get(Api.API_QUERYMERCHANTPARAMS_URL).asString().lifeOnMain(this)
             .subscribe({ response ->
                 resultCallBack.onSucess(response)

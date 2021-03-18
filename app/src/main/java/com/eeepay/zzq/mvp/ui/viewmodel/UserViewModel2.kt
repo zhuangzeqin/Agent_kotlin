@@ -5,8 +5,6 @@ import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 
 
 /**
@@ -19,20 +17,18 @@ import kotlinx.coroutines.launch
  * 邮箱：zzq@eeepay.cn
  * 备注:
  */
-class UserViewModel : ViewModel() {
+class UserViewModel2 : ViewModel() {
     //    private val userLiveData: MutableLiveData<String>? = null
 //    private val loadingLiveData: MutableLiveData<Boolean>? = null
     //setValue()只能在主线程中调用，postValue()可以在任何线程中调用。
     private var userLiveData: MutableLiveData<String>? = null
     private var loadingLiveData: MutableLiveData<Boolean>? = null
 
-
     init {
         //userLiveData用于抛出用户信息，
         userLiveData = MutableLiveData()
         //loadingLiveData用于控制进度条显示。
         loadingLiveData = MutableLiveData()
-
     }
 
     /**
@@ -64,20 +60,6 @@ class UserViewModel : ViewModel() {
 
     }
 
-    fun getReposWithCoroutine() {
-//        private val api = ApiService().get()
-        viewModelScope.launch {
-            try {
-//                val repos = api.getReposWithCoroutine()
-                // 成功逻辑
-            } catch (e: Exception) {
-                // 失败逻辑
-            }
-        }
-
-
-    }
-
     fun getUserLiveData(): LiveData<String?>? {
         return userLiveData
     }
@@ -85,11 +67,7 @@ class UserViewModel : ViewModel() {
     fun getLoadingLiveData(): LiveData<Boolean?>? {
         return loadingLiveData
     }
+
 }
-
-
-
-
-
 
 

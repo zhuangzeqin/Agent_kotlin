@@ -1,3 +1,4 @@
+include ':mylibrary'
 rootProject.name='Agent_kotlin'
 include ':app'
 

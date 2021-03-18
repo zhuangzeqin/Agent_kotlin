@@ -1,10 +1,7 @@
 package com.eeepay.zzq.agent_kotlin
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.eeepay.zzq.by.IDataPersistence
-import com.eeepay.zzq.by.SQLData
+import com.eeepay.zzq.lambda.LoginLogicImpl
 import org.junit.Test
-import org.junit.runner.RunWith
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +11,7 @@ import java.util.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
 
     @Test
@@ -50,7 +47,6 @@ class ExampleInstrumentedTest {
 //        val stringToDate = getStringToDate("8")
 //        println("stringToDate = ${stringToDate}")
 
-
 //        val tCar = CarFactory(CarType.BCar)
 //        val nCar = CarFactory(CarType.DCar)
 //        println("traditional car use ${tCar.name}")
@@ -64,10 +60,45 @@ class ExampleInstrumentedTest {
         //再简单一点，如果你不用传入多种不同的实例，
         // 可以在构造方法中去掉默认参数，
         // 直接在by关键字后面添加具体的接口实现
-        class MyData : IDataPersistence by SQLData()
-        MyData().addData()
-        MyData().delData()
-        MyData().queryData()
+//        class MyData : IDataPersistence by SQLData()
+//        MyData().addData()
+//        MyData().delData()
+//        MyData().queryData()
+
+
+//        SimpleKotlinDemo().main("")multiplyByTwo
+        println("start======")
+//        multiplyByTwo(5) {
+//            //做一下其它的逻辑操作
+//            val sql  = 5//比如我做了一个逻辑操作； 去数据港查询 得到一个数值5
+//            val temper = it*sql
+//             println("$temper")
+//            //如果lamba 里面有返回的记得@语句； 否则会影响程序的执行流程
+////            return@multiplyByTwo
+//            return@multiplyByTwo
+//        }
+//        LoginLogicImpl.register(
+//            { data ->
+//                println("${data.toString()}")
+//            },
+//            { code, message ->
+//                println("${code}+${message}")
+//            }
+//
+//        )
+
+        LoginLogicImpl.register2<String> {
+            OnNext {
+                data ->
+                 println("aaa${data}")
+            }
+           OnError { code, message ->
+                println("aaa${code}"+"aaa${message}")
+           }
+
+        }
+
+        println("end======")
     }
 
     //将字符串转换为时间戳
@@ -95,8 +126,8 @@ class ExampleInstrumentedTest {
     fun testRun() {
         var str = "aaaaa"
         run {
-             str = "bbbbbb"
-            println("zzq:"+str) // I am xys
+            str = "bbbbbb"
+            println("zzq:" + str) // I am xys
         }
         println(str)  // I am zj
     }
