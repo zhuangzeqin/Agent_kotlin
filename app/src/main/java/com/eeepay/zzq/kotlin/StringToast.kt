@@ -1,6 +1,8 @@
 package com.eeepay.zzq.kotlin
 
 import com.eeepay.zzq.utils.ToastUtils
+import isNotEmptyWithContract
+import kotlin.contracts.ExperimentalContracts
 
 /**
  * 描述：class describe
@@ -10,8 +12,14 @@ import com.eeepay.zzq.utils.ToastUtils
  * 备注:
  */
 //inline 关键字应该只用在需要内联特性的函数中，比如高阶函数作为参数和具体化的类型参数时。
-  fun String.toast(msg:String): Unit {
+@ExperimentalContracts
+fun String.toast(msg:String): Unit {
     if (msg.isNotEmpty())
+    {
+
+    }
+
+    var bb =  isNotEmptyWithContract(msg)
     ToastUtils.showShort(msg)
 }
 

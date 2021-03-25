@@ -14,4 +14,7 @@ import rxhttp.wrapper.annotations.NonNull
 abstract class BaseModel(@NonNull owner: LifecycleOwner) : BaseScope(owner){
     //参数列表
     protected var mParams:HashMap<String,Any> = HashMap()
+    fun test(): Unit {
+
+    }
 }

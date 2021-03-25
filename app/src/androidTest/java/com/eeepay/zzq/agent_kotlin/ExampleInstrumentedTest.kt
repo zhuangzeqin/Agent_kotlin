@@ -1,6 +1,5 @@
 package com.eeepay.zzq.agent_kotlin
 
-import com.eeepay.zzq.lambda.LoginLogicImpl
 import org.junit.Test
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -77,26 +76,45 @@ class ExampleInstrumentedTest {
 ////            return@multiplyByTwo
 //            return@multiplyByTwo
 //        }
-//        LoginLogicImpl.register(
-//            { data ->
-//                println("${data.toString()}")
-//            },
-//            { code, message ->
-//                println("${code}+${message}")
-//            }
-//
-//        )
+      /*  LoginLogicImpl.register(
+            { data ->
+                println("${data.toString()}")
+            },
+            { code, message ->
+                println("${code}+${message}")
+            }
+
+        )
 
         LoginLogicImpl.register2<String> {
-            OnNext {
-                data ->
-                 println("aaa${data}")
+            OnNext { data ->
+                println("aaa${data}")
             }
-           OnError { code, message ->
-                println("aaa${code}"+"aaa${message}")
-           }
+            OnError { code, message ->
+                println("aaa${code}" + "aaa${message}")
+            }
 
+        }*/
+
+      /* val str = LoginLogicImpl.register3 { i, s ->
+           println("aaa${i}" + "aaa${s}")
+          var string = "aaa${i}" + "aaa${s}"
+           "default"
         }
+        println(str.toString())*/
+
+
+
+        /**
+         * 要从arraylist中删除重复项，我们也可以使用java 8 stream api。使用steam的distinct()方法返回一个由不同数据组成的流，通过对象的equals（）方法进行比较。
+        收集所有区域数据List使用Collectors.toList()。
+        Java程序，用于在不使用Set的情况下从java中的arraylist中删除重复项。
+         */
+       /* val numbersList = ArrayList(listOf(1, 1, 2, 3, 3, 3, 4, 5, 6, 6, 6, 7, 8))
+        System.out.println(numbersList)
+        val listWithoutDuplicates: List<Int> =
+            numbersList.stream().distinct().collect(Collectors.toList())
+        println(listWithoutDuplicates)*/
 
         println("end======")
     }

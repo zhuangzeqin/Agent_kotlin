@@ -30,4 +30,20 @@ object LoginLogicImpl {
             callBack.errorFun(400, "failure...")   //失败回调
         }
     }
+
+    fun register3(call: (Int,String) -> String) {
+        if (false) {
+        } else {
+            call.invoke(400,"zzq")
+        }
+    }
+
+    fun<T> register4(call:IResponseCallback<T>.()->Unit) {
+        var IResponseCallback = ResponseCallbackListener<T>()//实例化回调接口实现类
+        IResponseCallback.call()  //将参数内的回调函数与实例化对象绑定
+        if (false) {
+        } else {
+            IResponseCallback.errorFun(400, "failure...")
+        }
+    }
 }
