@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme">
-        <activity android:name="com.eeepay.zzq.mvp.ui.viewmodel.UserActivity"></activity>
+        <activity android:name="com.eeepay.zzq.koin.FactoryActivity"/>
+        <activity android:name="com.eeepay.zzq.mvp.ui.viewmodel.UserActivity"/>
         <activity android:name="com.eeepay.zzq.mvp.ui.lifecycle.LifecycleTestActivity" />
         <activity android:name="com.eeepay.zzq.mvp.ui.Countdown.CountdownAct" />
         <activity android:name="com.eeepay.zzq.mvp.ui.navigation.NavHostMainAct" />

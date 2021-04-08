@@ -4,6 +4,7 @@ import android.graphics.Color
 import com.eeepay.zzq.agent_kotlin.R
 import com.eeepay.zzq.base.BaseMvpActivity
 import com.eeepay.zzq.bean.PubDataktInfo
+import com.eeepay.zzq.koin.FactoryActivity
 import com.eeepay.zzq.mvp.presenter.base.CreatePresenter
 import com.eeepay.zzq.mvp.presenter.base.PresenterVariable
 import com.eeepay.zzq.mvp.presenter.login.ILoginView
@@ -12,9 +13,7 @@ import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionPresenter
 import com.eeepay.zzq.mvp.presenter.pubdata.CheckVersionView
 import com.eeepay.zzq.mvp.presenter.pubdata.IPublicDataView
 import com.eeepay.zzq.mvp.presenter.pubdata.PubDataPresenter
-import com.eeepay.zzq.mvp.ui.navigation.NavHostMainAct
 import com.eeepay.zzq.utils.PreferenceUtils
-import com.eeepay.zzq.utils.WhitleActivityStackManager
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -55,8 +54,9 @@ class LoginAct : BaseMvpActivity<LoginPresenter>(), ILoginView, IPublicDataView,
 //            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
 //            goActivity<RxMainAct>(this)
 //            goActivity<CoroutineActivity>(this)
-            WhitleActivityStackManager.getInstance().push(this);
-            goActivity<NavHostMainAct>(this)
+//            WhitleActivityStackManager.getInstance().push(this);
+//            goActivity<NavHostMainAct>(this)
+            goActivity<FactoryActivity>(this)
 
         }
         //升级断点下载测试demo

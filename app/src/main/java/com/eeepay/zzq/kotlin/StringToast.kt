@@ -14,11 +14,6 @@ import kotlin.contracts.ExperimentalContracts
 //inline 关键字应该只用在需要内联特性的函数中，比如高阶函数作为参数和具体化的类型参数时。
 @ExperimentalContracts
 fun String.toast(msg:String): Unit {
-    if (msg.isNotEmpty())
-    {
-
-    }
-
     var bb =  isNotEmptyWithContract(msg)
     ToastUtils.showShort(msg)
 }
