@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graden"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginFragment"
+    tools:ignore="UnusedNavigation">
 <!--    app:startDestination，这是给导航指定起始位置的，必须要设置，不然会奔溃报错。-->
     <fragment
         android:id="@+id/loginFragment"

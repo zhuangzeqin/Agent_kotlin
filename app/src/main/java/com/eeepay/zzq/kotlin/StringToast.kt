@@ -29,5 +29,6 @@ inline fun multiplyByTwo(num: Int, crossinline block:(Int)->Unit):Int
 {
     val temp =num*2
     block.invoke(temp)
+    val listOf = listOf<String>("12", "36")
     return temp
 }
